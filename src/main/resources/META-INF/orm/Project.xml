@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+	xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+  version="1.0">
+  
+  <package>org.programmerplanet.intracollab.model</package>
+  
+  <entity class="Project">
+  	<table name="ic_project"/>
+  	<attributes>
+  		<id name="id">
+  			<column name="id"/>
+  			<generated-value strategy="AUTO"/>
+  		</id>
+  		<basic name="name">
+  			<column name="name"/>
+  		</basic>
+  		<basic name="description">
+  			<column name="description"/>
+  		</basic>
+  		<one-to-many name="components" mapped-by="project" target-entity="Component"/>
+  	</attributes>
+  </entity>
+  
+</entity-mappings>

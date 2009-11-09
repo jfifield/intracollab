@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+	xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+  version="1.0">
+  
+  <package>org.programmerplanet.intracollab.model</package>
+  
+  <entity class="Ticket">
+  	<table name="ic_ticket"/>
+  	<attributes>
+  		<id name="id">
+  			<column name="id"/>
+  			<generated-value strategy="AUTO"/>
+  		</id>
+  		<basic name="name">
+  			<column name="name"/>
+  		</basic>
+  		<basic name="description">
+  			<column name="description"/>
+  		</basic>
+  		<basic name="priority">
+  			<column name="priority"/>
+  		</basic>
+  		<basic name="status">
+  			<column name="status"/>
+  		</basic>
+  		<basic name="created">
+  			<column name="created"/>
+  		</basic>
+  		<basic name="createdBy">
+  			<column name="created_by"/>
+  		</basic>
+  		<many-to-one name="project">
+  			<join-column name="project_id"/>
+  		</many-to-one>
+  		<many-to-one name="assignedTo">
+  			<join-column name="assigned_to_id"/>
+  		</many-to-one>
+  		<many-to-one name="component">
+  			<join-column name="component_id"/>
+  		</many-to-one>
+  		<one-to-many name="comments" mapped-by="ticket" target-entity="Comment"/>
+  		<one-to-many name="attachments" mapped-by="ticket" target-entity="AttachmentInfo"/>
+  	</attributes>
+  </entity>
+  
+</entity-mappings>

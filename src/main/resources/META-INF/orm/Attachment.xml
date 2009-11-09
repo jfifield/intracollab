@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+	xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+  version="1.0">
+  
+  <package>org.programmerplanet.intracollab.model</package>
+
+  <entity class="AttachmentInfo">
+  	<table name="ic_attachment"/>
+  	<attributes>
+  		<id name="id">
+  			<column name="id"/>
+  			<generated-value strategy="AUTO"/>
+  		</id>
+  		<basic name="fileName">
+  			<column name="file_name"/>
+  		</basic>
+  		<basic name="description">
+  			<column name="description"/>
+  		</basic>
+  		<basic name="fileSize">
+  			<column name="file_size"/>
+  		</basic>
+  		<basic name="contentType">
+  			<column name="content_type"/>
+  		</basic>
+  		<basic name="created">
+  			<column name="created"/>
+  		</basic>
+  		<basic name="createdBy">
+  			<column name="created_by"/>
+  		</basic>
+  		<many-to-one name="ticket">
+  			<join-column name="ticket_id"/>
+  		</many-to-one>
+  	</attributes>
+  </entity>
+  
+  <entity class="Attachment">
+  	<table name="ic_attachment"/>
+  	<attributes>
+  		<id name="id">
+  			<column name="id"/>
+  			<generated-value strategy="AUTO"/>
+  		</id>
+  		<basic name="fileName">
+  			<column name="file_name"/>
+  		</basic>
+  		<basic name="description">
+  			<column name="description"/>
+  		</basic>
+  		<basic name="fileSize">
+  			<column name="file_size"/>
+  		</basic>
+  		<basic name="contentType">
+  			<column name="content_type"/>
+  		</basic>
+  		<basic name="content">
+  			<column name="content"/>
+  			<lob/>
+  		</basic>
+  		<basic name="created">
+  			<column name="created"/>
+  		</basic>
+  		<basic name="createdBy">
+  			<column name="created_by"/>
+  		</basic>
+  		<many-to-one name="ticket">
+  			<join-column name="ticket_id"/>
+  		</many-to-one>
+  	</attributes>
+  </entity>
+  
+</entity-mappings>

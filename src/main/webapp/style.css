@@ -1,0 +1,112 @@
+BODY, INPUT, TEXTAREA {
+	background-color: white;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+INPUT, SELECT, TEXTAREA {
+	border: 1px solid #C3BBB6;
+	padding: 1px;
+	background: #ffffff url(images/input_bg.gif) 0 0 repeat-x;
+}
+
+SELECT {
+	font-size: 11px;
+}
+
+IMG {
+    border: none;
+    vertical-align: middle;
+}
+
+A {
+	text-decoration: none;
+	color: navy;
+}
+
+A:hover {
+	text-decoration: underline;
+}
+
+.error {
+	font-size: smaller;
+	color: red;
+}
+
+H1, H2, H3 {
+	color: navy;
+}
+
+TABLE.list {
+	background-color: #f9fbfd;
+	border: 1px solid #C3BBB6;
+	border-collapse: collapse;
+}
+
+TABLE.list TH {
+	border: 1px solid #C3BBB6;
+	background: #ffffff url(images/header_bg.gif) 0 0 repeat-x;
+	color: navy;
+	white-space: nowrap;
+}
+
+TABLE.list TD {
+	border: 1px solid #C3BBB6;
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: left;
+	white-space: nowrap;
+	vertical-align: top;
+}
+
+TABLE.list CAPTION {
+	color: navy;
+	text-align: left;
+	font-weight: bold;
+}
+
+TH.sortable A {
+	background-position: right;
+	background-repeat: no-repeat; 
+	display: block;
+	width: 100%;
+}
+
+TH.order1 A {
+	background-image: url(images/bullet_arrow_down.png);
+}
+
+TH.order2 A {
+	background-image: url(images/bullet_arrow_up.png);
+}
+
+TABLE.detail {
+	background-color: #f9fbfd;
+	border: 1px solid #C3BBB6;
+}
+
+TABLE.detail CAPTION {
+	color: navy;
+	font-weight: bold;
+	text-align: left;
+}
+
+TABLE.detail TD.label {
+	color: navy;
+	text-align: right;
+	padding-right: 10px;
+}
+
+TABLE.detail TD.required {
+	font-weight: bold;
+}
+
+TABLE.detail TD {
+	text-align: left;
+	white-space: nowrap;
+	vertical-align: top;
+}
+
+.shrink {
+	width: 1%;
+}

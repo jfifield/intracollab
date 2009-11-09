@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+	xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+  version="1.0">
+  
+  <package>org.programmerplanet.intracollab.model</package>
+  
+  <entity class="User">
+  	<table name="ic_user"/>
+  	<attributes>
+  		<id name="id">
+  			<column name="id"/>
+  			<generated-value strategy="AUTO"/>
+  		</id>
+  		<basic name="username">
+  			<column name="username"/>
+  		</basic>
+  		<basic name="password">
+  			<column name="password"/>
+  		</basic>
+  		<basic name="emailAddress">
+  			<column name="email_address"/>
+  		</basic>
+  		<basic name="administrator">
+  			<column name="administrator"/>
+  		</basic>
+  	</attributes>
+  </entity>
+
+</entity-mappings>

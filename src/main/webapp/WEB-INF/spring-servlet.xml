@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation=
+		"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+	default-autowire="byName">
+
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages"/>
+	</bean>
+
+	<bean id="methodNameResolver" class="org.programmerplanet.intracollab.web.spring.PrefixedParameterMethodNameResolver">
+		<property name="prefix" value="__"/>
+	</bean>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+	<bean id="loginFormValidator" class="org.programmerplanet.intracollab.web.LoginFormValidator"/>
+
+	<bean id="loginController" class="org.programmerplanet.intracollab.web.LoginController">
+		<property name="sessionForm" value="true"/>
+		<property name="commandName" value="login"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.web.LoginForm"/>
+		<property name="validator" ref="loginFormValidator"/>
+		<property name="formView" value="login"/>
+		<property name="successView" value="redirect:/project/list.do"/>
+	</bean>
+	
+	<bean id="logoutController" class="org.programmerplanet.intracollab.web.LogoutController">
+		<property name="loginView" value="redirect:/login.do"/>
+	</bean>
+
+	<bean id="userListController" class="org.programmerplanet.intracollab.web.UserListController"/>
+
+	<bean id="userFormValidator" class="org.programmerplanet.intracollab.web.UserFormValidator"/>
+
+	<bean id="userEditController" class="org.programmerplanet.intracollab.web.UserEditController">
+		<property name="sessionForm" value="false"/>
+		<property name="commandName" value="user"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.web.UserForm"/>
+		<property name="validator" ref="userFormValidator"/>
+		<property name="formView" value="user/edit"/>
+		<property name="successView" value="redirect:/user/list.do"/>
+	</bean>
+
+	<bean id="projectListController" class="org.programmerplanet.intracollab.web.ProjectListController"/>
+
+	<bean id="projectValidator" class="org.programmerplanet.intracollab.web.ProjectValidator"/>
+
+	<bean id="projectEditController" class="org.programmerplanet.intracollab.web.ProjectEditController">
+		<property name="sessionForm" value="false"/>
+		<property name="commandName" value="project"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.model.Project"/>
+		<property name="validator" ref="projectValidator"/>
+		<property name="formView" value="project/edit"/>
+		<property name="successView" value="redirect:/project/list.do"/>
+	</bean>
+
+	<bean id="componentListController" class="org.programmerplanet.intracollab.web.ComponentListController"/>
+
+	<bean id="componentValidator" class="org.programmerplanet.intracollab.web.ComponentValidator"/>
+
+	<bean id="componentEditController" class="org.programmerplanet.intracollab.web.ComponentEditController">
+		<property name="sessionForm" value="false"/>
+		<property name="commandName" value="component"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.model.Component"/>
+		<property name="validator" ref="componentValidator"/>
+		<property name="formView" value="component/edit"/>
+		<property name="successView" value="redirect:/component/list.do"/>
+	</bean>
+
+	<bean id="ticketListController" class="org.programmerplanet.intracollab.web.TicketListController"/>
+
+	<bean id="ticketViewController" class="org.programmerplanet.intracollab.web.TicketViewController"/>
+
+	<bean id="ticketValidator" class="org.programmerplanet.intracollab.web.TicketValidator"/>
+
+	<bean id="ticketEditController" class="org.programmerplanet.intracollab.web.TicketEditController">
+		<property name="sessionForm" value="false"/>
+		<property name="commandName" value="ticket"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.model.Ticket"/>
+		<property name="validator" ref="ticketValidator"/>
+		<property name="formView" value="ticket/edit"/>
+		<property name="successView" value="redirect:/ticket/list.do"/>
+	</bean>
+
+	<bean id="commentValidator" class="org.programmerplanet.intracollab.web.CommentValidator"/>
+
+	<bean id="commentEditController" class="org.programmerplanet.intracollab.web.CommentEditController">
+		<property name="sessionForm" value="false"/>
+		<property name="commandName" value="comment"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.model.Comment"/>
+		<property name="validator" ref="commentValidator"/>
+		<property name="formView" value="comment/edit"/>
+		<property name="successView" value="redirect:/ticket/view.do"/>
+	</bean>
+
+	<bean id="attachmentFormValidator" class="org.programmerplanet.intracollab.web.AttachmentFormValidator"/>
+
+	<bean id="attachmentEditController" class="org.programmerplanet.intracollab.web.AttachmentEditController">
+		<property name="sessionForm" value="false"/>
+		<property name="commandName" value="attachment"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.web.AttachmentForm"/>
+		<property name="validator" ref="attachmentFormValidator"/>
+		<property name="formView" value="attachment/edit"/>
+		<property name="successView" value="redirect:/ticket/view.do"/>
+	</bean>
+
+	<bean id="attachmentDownloadController" class="org.programmerplanet.intracollab.web.AttachmentDownloadController"/>
+	
+	<bean id="unsecureMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/login.do">loginController</prop>
+				<prop key="/logout.do">logoutController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="authenticationInterceptor" class="org.programmerplanet.intracollab.web.AuthenticationInterceptor">
+		<property name="loginView" value="redirect:/login.do"/>
+	</bean>
+
+	<bean id="administrationInterceptor" class="org.programmerplanet.intracollab.web.AdministrationInterceptor"/>
+
+	<bean id="secureMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="authenticationInterceptor"/>
+			</list>
+		</property>
+		<property name="mappings">
+			<props>
+				<prop key="/project/list.do">projectListController</prop>
+				<prop key="/ticket/list.do">ticketListController</prop>
+				<prop key="/ticket/view.do">ticketViewController</prop>
+				<prop key="/ticket/edit.do">ticketEditController</prop>
+				<prop key="/comment/edit.do">commentEditController</prop>
+				<prop key="/attachment/edit.do">attachmentEditController</prop>
+				<prop key="/attachment/download.do">attachmentDownloadController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="secureAdministrationMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="authenticationInterceptor"/>
+				<ref bean="administrationInterceptor"/>
+			</list>
+		</property>
+		<property name="mappings">
+			<props>
+				<prop key="/user/list.do">userListController</prop>
+				<prop key="/user/edit.do">userEditController</prop>
+				<prop key="/project/edit.do">projectEditController</prop>
+				<prop key="/component/list.do">componentListController</prop>
+				<prop key="/component/edit.do">componentEditController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles/tiles.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/view/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+</beans>
