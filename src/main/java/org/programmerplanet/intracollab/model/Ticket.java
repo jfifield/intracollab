@@ -17,6 +17,7 @@ public class Ticket {
 	private String name;
 	private String description;
 	private Component component;
+	private Milestone milestone;
 	private Priority priority;
 	private Status status;
 	private User assignedTo;
@@ -63,6 +64,14 @@ public class Ticket {
 
 	public Component getComponent() {
 		return component;
+	}
+
+	public void setMilestone(Milestone milestone) {
+		this.milestone = milestone;
+	}
+
+	public Milestone getMilestone() {
+		return milestone;
 	}
 
 	public void setPriority(Priority priority) {

@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.programmerplanet.intracollab.model.Attachment;
 import org.programmerplanet.intracollab.model.Comment;
 import org.programmerplanet.intracollab.model.Component;
+import org.programmerplanet.intracollab.model.Milestone;
 import org.programmerplanet.intracollab.model.Project;
 import org.programmerplanet.intracollab.model.Ticket;
 
@@ -50,5 +51,11 @@ public interface ProjectManager {
 	void saveComponent(Component component);
 
 	void deleteComponent(Component component);
+
+	Milestone getMilestone(Long id);
+
+	void saveMilestone(Milestone milestone);
+
+	void deleteMilestone(Milestone milestone);
 
 }

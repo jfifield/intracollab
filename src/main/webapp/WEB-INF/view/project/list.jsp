@@ -20,6 +20,7 @@
 			<a href="ticket/list.do?project_id=${project.id}">Tickets</a>
 			<t:administrator>
 				<a href="component/list.do?project_id=${project.id}">Components</a>
+				<a href="milestone/list.do?project_id=${project.id}">Milestones</a>
 				<a href="project/edit.do?id=${project.id}">Edit</a>
 			</t:administrator>
 		</display:column>

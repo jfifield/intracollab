@@ -41,6 +41,9 @@
   		<many-to-one name="component">
   			<join-column name="component_id"/>
   		</many-to-one>
+  		<many-to-one name="milestone">
+  			<join-column name="milestone_id"/>
+  		</many-to-one>
   		<one-to-many name="comments" mapped-by="ticket" target-entity="Comment"/>
   		<one-to-many name="attachments" mapped-by="ticket" target-entity="AttachmentInfo"/>
   	</attributes>

@@ -9,6 +9,7 @@
 		<mapping-file>META-INF/orm/User.xml</mapping-file>
 		<mapping-file>META-INF/orm/Project.xml</mapping-file>
 		<mapping-file>META-INF/orm/Component.xml</mapping-file>
+		<mapping-file>META-INF/orm/Milestone.xml</mapping-file>
 		<mapping-file>META-INF/orm/Ticket.xml</mapping-file>
 		<mapping-file>META-INF/orm/Comment.xml</mapping-file>
 		<mapping-file>META-INF/orm/Attachment.xml</mapping-file>

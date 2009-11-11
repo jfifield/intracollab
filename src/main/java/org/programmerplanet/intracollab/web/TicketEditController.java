@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.programmerplanet.intracollab.manager.ProjectManager;
 import org.programmerplanet.intracollab.manager.UserManager;
 import org.programmerplanet.intracollab.model.Component;
+import org.programmerplanet.intracollab.model.Milestone;
 import org.programmerplanet.intracollab.model.Project;
 import org.programmerplanet.intracollab.model.Ticket;
 import org.programmerplanet.intracollab.model.User;
 import org.programmerplanet.intracollab.propertyeditors.ComponentPropertyEditor;
+import org.programmerplanet.intracollab.propertyeditors.MilestonePropertyEditor;
 import org.programmerplanet.intracollab.propertyeditors.UserPropertyEditor;
 import org.programmerplanet.intracollab.web.spring.SimpleMultiActionFormController;
 import org.springframework.validation.BindException;
@@ -51,6 +53,7 @@ public class TicketEditController extends SimpleMultiActionFormController {
 		super.initBinder(request, binder);
 		binder.registerCustomEditor(User.class, new UserPropertyEditor(userManager));
 		binder.registerCustomEditor(Component.class, new ComponentPropertyEditor(projectManager));
+		binder.registerCustomEditor(Milestone.class, new MilestonePropertyEditor(projectManager));
 	}
 
 	public ModelAndView save(HttpServletRequest request, HttpServletResponse response, Object command, BindException errors) throws Exception {
@@ -110,8 +113,9 @@ public class TicketEditController extends SimpleMultiActionFormController {
 		data.put("users", users);
 
 		Ticket ticket = (Ticket)command;
-		Project project = projectManager.getProject(ticket.getProject().getId(), "components");
+		Project project = projectManager.getProject(ticket.getProject().getId(), "components", "milestones");
 		data.put("components", project.getComponents());
+		data.put("milestones", project.getMilestones());
 
 		return data;
 	}

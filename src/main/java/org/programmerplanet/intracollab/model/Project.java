@@ -15,6 +15,7 @@ public class Project {
 	private String name;
 	private String description;
 	private Set<Component> components;
+	private Set<Milestone> milestones;
 
 	public void setId(Long id) {
 		this.id = id;
@@ -46,6 +47,14 @@ public class Project {
 
 	public Set<Component> getComponents() {
 		return components;
+	}
+
+	public void setMilestones(Set<Milestone> milestones) {
+		this.milestones = milestones;
+	}
+
+	public Set<Milestone> getMilestones() {
+		return milestones;
 	}
 
 }

@@ -71,6 +71,19 @@
 		<property name="successView" value="redirect:/component/list.do"/>
 	</bean>
 
+	<bean id="milestoneListController" class="org.programmerplanet.intracollab.web.MilestoneListController"/>
+
+	<bean id="milestoneValidator" class="org.programmerplanet.intracollab.web.MilestoneValidator"/>
+
+	<bean id="milestoneEditController" class="org.programmerplanet.intracollab.web.MilestoneEditController">
+		<property name="sessionForm" value="false"/>
+		<property name="commandName" value="milestone"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.model.Milestone"/>
+		<property name="validator" ref="milestoneValidator"/>
+		<property name="formView" value="milestone/edit"/>
+		<property name="successView" value="redirect:/milestone/list.do"/>
+	</bean>
+
 	<bean id="ticketListController" class="org.programmerplanet.intracollab.web.TicketListController"/>
 
 	<bean id="ticketViewController" class="org.programmerplanet.intracollab.web.TicketViewController"/>
@@ -158,6 +171,8 @@
 				<prop key="/project/edit.do">projectEditController</prop>
 				<prop key="/component/list.do">componentListController</prop>
 				<prop key="/component/edit.do">componentEditController</prop>
+				<prop key="/milestone/list.do">milestoneListController</prop>
+				<prop key="/milestone/edit.do">milestoneEditController</prop>
 			</props>
 		</property>
 	</bean>

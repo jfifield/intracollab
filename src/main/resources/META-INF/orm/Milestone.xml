@@ -7,8 +7,8 @@
   
   <package>org.programmerplanet.intracollab.model</package>
   
-  <entity class="Project">
-  	<table name="ic_project"/>
+  <entity class="Milestone">
+  	<table name="ic_milestone"/>
   	<attributes>
   		<id name="id">
   			<column name="id"/>
@@ -17,11 +17,15 @@
   		<basic name="name">
   			<column name="name"/>
   		</basic>
-  		<basic name="description">
-  			<column name="description"/>
+  		<basic name="dueDate">
+  			<column name="due_date"/>
   		</basic>
-  		<one-to-many name="components" mapped-by="project" target-entity="Component"/>
-  		<one-to-many name="milestones" mapped-by="project" target-entity="Milestone"/>
+  		<basic name="completed">
+  			<column name="completed"/>
+  		</basic>
+  		<many-to-one name="project">
+  			<join-column name="project_id"/>
+  		</many-to-one>
   	</attributes>
   </entity>
   

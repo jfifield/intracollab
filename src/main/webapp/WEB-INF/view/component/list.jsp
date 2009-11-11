@@ -12,7 +12,7 @@
 		<display:column title="Name" property="name" sortable="true"/>
 		<c:set var="addLink"><a href="component/edit.do?project_id=${project.id}">Add</a></c:set>
 		<display:column title="${addLink}" headerClass="shrink">
-			<a href="component/edit.do?id=${ticket.id}">Edit</a>
+			<a href="component/edit.do?id=${component.id}">Edit</a>
 		</display:column>
 	</display:table>
 

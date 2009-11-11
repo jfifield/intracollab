@@ -8,6 +8,7 @@ import java.util.Map;
 import org.programmerplanet.intracollab.model.Attachment;
 import org.programmerplanet.intracollab.model.Comment;
 import org.programmerplanet.intracollab.model.Component;
+import org.programmerplanet.intracollab.model.Milestone;
 import org.programmerplanet.intracollab.model.Project;
 import org.programmerplanet.intracollab.model.Ticket;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
@@ -164,6 +165,28 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 	public void deleteComponent(Component component) {
 		component = this.getJpaTemplate().getReference(Component.class, component.getId());
 		this.getJpaTemplate().remove(component);
+	}
+
+	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getMilestone(java.lang.Long)
+	 */
+	public Milestone getMilestone(Long id) {
+		return this.getJpaTemplate().find(Milestone.class, id);
+	}
+
+	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#saveMilestone(org.programmerplanet.intracollab.model.Milestone)
+	 */
+	public void saveMilestone(Milestone milestone) {
+		this.getJpaTemplate().merge(milestone);
+	}
+
+	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#deleteMilestone(org.programmerplanet.intracollab.model.Milestone)
+	 */
+	public void deleteMilestone(Milestone milestone) {
+		milestone = this.getJpaTemplate().getReference(Milestone.class, milestone.getId());
+		this.getJpaTemplate().remove(milestone);
 	}
 
 }

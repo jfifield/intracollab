@@ -82,7 +82,35 @@
 			</tr>
 			</c:if>
 			</spring:bind>
-	
+			
+			<spring:bind path="ticket.milestone">
+			<tr>
+				<td class="label">Milestone:</td>
+				<td>
+					<select name="${status.expression}">
+						<option value=""></option>
+						<c:forEach var="mv" items="${milestones}">
+							<c:set var="selected" value=""/>
+							<c:if test="${status.value == mv.id}">
+								<c:set var="selected" value=" selected=\"selected\""/>
+							</c:if>
+							<option value="${mv.id}"${selected}>${mv.name}</option>
+						</c:forEach>
+					</select>
+				</td>
+			</tr>
+			<c:if test="${status.error}">
+			<tr>
+				<td></td>
+				<td>
+					<c:forEach var="errorMessage" items="${status.errorMessages}">
+						<span class="error">* ${errorMessage}</span><br/>
+					</c:forEach>
+				</td>
+			</tr>
+			</c:if>
+			</spring:bind>
+			
 			<spring:bind path="ticket.priority">
 			<tr>
 				<td class="label required">Priority:</td>

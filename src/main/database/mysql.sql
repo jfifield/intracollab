@@ -35,6 +35,20 @@ CREATE TABLE `ic_component` (
 ) ENGINE=InnoDB;
 
 --
+-- Table `ic_milestone`
+--
+DROP TABLE IF EXISTS `ic_milestone`;
+CREATE TABLE `ic_milestone` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `project_id` int unsigned NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `due_date` datetime NOT NULL,
+  `completed` bit NOT NULL DEFAULT b'0',
+  CONSTRAINT `pk_milestone` PRIMARY KEY (`id`),
+  CONSTRAINT `fk_milestone_project` FOREIGN KEY (`project_id`) REFERENCES `ic_project` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+--
 -- Table `ic_ticket`
 --
 DROP TABLE IF EXISTS `ic_ticket`;
@@ -44,6 +58,7 @@ CREATE TABLE `ic_ticket` (
   `name` varchar(128) NOT NULL,
   `description` text,
   `component_id` int unsigned,
+  `milestone_id` int unsigned,
   `priority` tinyint unsigned NOT NULL,
   `status` tinyint unsigned NOT NULL,
   `assigned_to_id` int unsigned,
@@ -52,7 +67,8 @@ CREATE TABLE `ic_ticket` (
   CONSTRAINT `pk_ticket` PRIMARY KEY (`id`),
   CONSTRAINT `fk_ticket_project` FOREIGN KEY (`project_id`) REFERENCES `ic_project` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_ticket_user` FOREIGN KEY (`assigned_to_id`) REFERENCES `ic_user` (`id`) ON DELETE SET NULL,
-  CONSTRAINT `fk_ticket_component` FOREIGN KEY (`component_id`) REFERENCES `ic_component` (`id`) ON DELETE SET NULL
+  CONSTRAINT `fk_ticket_component` FOREIGN KEY (`component_id`) REFERENCES `ic_component` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `fk_ticket_milestone` FOREIGN KEY (`milestone_id`) REFERENCES `ic_milestone` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 --
