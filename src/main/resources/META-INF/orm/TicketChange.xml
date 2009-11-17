@@ -24,6 +24,7 @@
   			<join-column name="ticket_id"/>
   		</many-to-one>
   		<one-to-many name="fields" mapped-by="ticketChange" target-entity="TicketChangeField" fetch="EAGER">
+  			<order-by>field</order-by>
   			<cascade><cascade-merge/></cascade>
   		</one-to-many>
   	</attributes>

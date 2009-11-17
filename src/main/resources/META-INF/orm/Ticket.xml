@@ -44,9 +44,15 @@
   		<many-to-one name="milestone">
   			<join-column name="milestone_id"/>
   		</many-to-one>
-  		<one-to-many name="comments" mapped-by="ticket" target-entity="Comment"/>
-  		<one-to-many name="attachments" mapped-by="ticket" target-entity="AttachmentInfo"/>
-  		<one-to-many name="changes" mapped-by="ticket" target-entity="TicketChange"/>
+  		<one-to-many name="comments" mapped-by="ticket" target-entity="Comment">
+  			<order-by>created</order-by>
+  		</one-to-many>
+  		<one-to-many name="attachments" mapped-by="ticket" target-entity="AttachmentInfo">
+  			<order-by>created</order-by>
+  		</one-to-many>
+  		<one-to-many name="changes" mapped-by="ticket" target-entity="TicketChange">
+  			<order-by>changeDate</order-by>
+  		</one-to-many>
   	</attributes>
   </entity>
   
