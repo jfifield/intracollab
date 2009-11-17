@@ -25,6 +25,7 @@ public class Ticket {
 	private String createdBy;
 	private Set<Comment> comments;
 	private Set<AttachmentInfo> attachments;
+	private Set<TicketChange> changes;
 
 	public void setId(Long id) {
 		this.id = id;
@@ -128,6 +129,14 @@ public class Ticket {
 
 	public Set<AttachmentInfo> getAttachments() {
 		return attachments;
+	}
+
+	public void setChanges(Set<TicketChange> changes) {
+		this.changes = changes;
+	}
+
+	public Set<TicketChange> getChanges() {
+		return changes;
 	}
 
 	public static enum Priority {

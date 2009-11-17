@@ -11,6 +11,8 @@ import org.programmerplanet.intracollab.model.Component;
 import org.programmerplanet.intracollab.model.Milestone;
 import org.programmerplanet.intracollab.model.Project;
 import org.programmerplanet.intracollab.model.Ticket;
+import org.programmerplanet.intracollab.model.TicketChange;
+import org.programmerplanet.intracollab.model.User;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 
 /**
@@ -97,10 +99,18 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 	}
 
 	/**
-	 * @see org.programmerplanet.intracollab.manager.ProjectManager#saveTicket(org.programmerplanet.intracollab.model.Ticket)
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#saveTicket(org.programmerplanet.intracollab.model.Ticket, org.programmerplanet.intracollab.model.User)
 	 */
-	public void saveTicket(Ticket ticket) {
+	public void saveTicket(Ticket ticket, User user) {
+		TicketChange change = null;
+		if (ticket.getId() != null) {
+			Ticket oldTicket = getTicket(ticket.getId());
+			change = TicketChange.calculateTicketChange(oldTicket, ticket, user);
+		}
 		this.getJpaTemplate().merge(ticket);
+		if (change != null) {
+			this.getJpaTemplate().merge(change);
+		}
 	}
 
 	/**

@@ -72,5 +72,21 @@
 	</c:forEach>
 </div>
 
+<div style="padding-top: 20px;">
+	<div style="padding-bottom: 3px;">
+		<span style="color: navy; font-size: larger; font-weight: bold;">Changes</span>
+	</div>
+	<c:forEach var="change" items="${ticket.changes}">
+		<div style="border-top: 1px solid gray;">
+			<i>${change.username} on <fmt:formatDate value="${change.changeDate}" type="both" dateStyle="short"/></i>
+			<ul>
+				<c:forEach var="field" items="${change.fields}">
+					<li><b>${field.field}</b> from '${field.oldValue}' to '${field.newValue}'</li>
+				</c:forEach>
+			</ul>
+		</div>
+	</c:forEach>
+</div>
+
 </tiles:putAttribute>	
 </tiles:insertDefinition>

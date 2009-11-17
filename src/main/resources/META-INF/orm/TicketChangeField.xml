@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+	xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+  version="1.0">
+  
+  <package>org.programmerplanet.intracollab.model</package>
+  
+  <entity class="TicketChangeField">
+  	<table name="ic_ticket_change_field"/>
+  	<attributes>
+  		<id name="id">
+  			<column name="id"/>
+  			<generated-value strategy="AUTO"/>
+  		</id>
+  		<basic name="field">
+  			<column name="field"/>
+  		</basic>
+  		<basic name="oldValue">
+  			<column name="old_value"/>
+  		</basic>
+  		<basic name="newValue">
+  			<column name="new_value"/>
+  		</basic>
+  		<many-to-one name="ticketChange">
+  			<join-column name="ticket_change_id"/>
+  		</many-to-one>
+  	</attributes>
+  </entity>
+  
+</entity-mappings>

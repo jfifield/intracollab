@@ -29,7 +29,7 @@ public class TicketViewController implements Controller {
 	 */
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Long id = ServletRequestUtils.getLongParameter(request, "id");
-		Ticket ticket = projectManager.getTicket(id, "comments", "attachments");
+		Ticket ticket = projectManager.getTicket(id, "comments", "attachments", "changes");
 		return new ModelAndView("ticket/view", "ticket", ticket);
 	}
 

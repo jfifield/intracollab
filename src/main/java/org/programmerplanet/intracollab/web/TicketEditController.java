@@ -58,7 +58,11 @@ public class TicketEditController extends SimpleMultiActionFormController {
 
 	public ModelAndView save(HttpServletRequest request, HttpServletResponse response, Object command, BindException errors) throws Exception {
 		Ticket ticket = (Ticket)command;
-		projectManager.saveTicket(ticket);
+
+		UserSession userSession = UserSession.getUserSession(request);
+		User user = userSession.getUser();
+
+		projectManager.saveTicket(ticket, user);
 		return new ModelAndView(this.getSuccessView(), "project_id", ticket.getProject().getId());
 	}
 

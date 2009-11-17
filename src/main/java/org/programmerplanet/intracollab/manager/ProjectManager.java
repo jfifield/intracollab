@@ -8,6 +8,7 @@ import org.programmerplanet.intracollab.model.Component;
 import org.programmerplanet.intracollab.model.Milestone;
 import org.programmerplanet.intracollab.model.Project;
 import org.programmerplanet.intracollab.model.Ticket;
+import org.programmerplanet.intracollab.model.User;
 
 /**
  * Primary interface for managing projects.
@@ -36,7 +37,7 @@ public interface ProjectManager {
 
 	Ticket getTicket(Long id, String... fetches);
 
-	void saveTicket(Ticket ticket);
+	void saveTicket(Ticket ticket, User user);
 
 	void deleteTicket(Ticket ticket);
 

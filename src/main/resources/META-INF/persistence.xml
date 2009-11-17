@@ -13,6 +13,8 @@
 		<mapping-file>META-INF/orm/Ticket.xml</mapping-file>
 		<mapping-file>META-INF/orm/Comment.xml</mapping-file>
 		<mapping-file>META-INF/orm/Attachment.xml</mapping-file>
+		<mapping-file>META-INF/orm/TicketChange.xml</mapping-file>
+		<mapping-file>META-INF/orm/TicketChangeField.xml</mapping-file>
 	</persistence-unit>
 	
 </persistence>

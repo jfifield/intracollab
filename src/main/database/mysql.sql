@@ -72,6 +72,33 @@ CREATE TABLE `ic_ticket` (
 ) ENGINE=InnoDB;
 
 --
+-- Table `ic_ticket_change`
+--
+DROP TABLE IF EXISTS `ic_ticket_change`;
+CREATE TABLE `ic_ticket_change` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `ticket_id` int unsigned NOT NULL,
+  `username` varchar(64) NOT NULL,
+  `change_date` datetime NOT NULL,
+  CONSTRAINT `pk_ticket_change` PRIMARY KEY (`id`),
+  CONSTRAINT `fk_ticket_change_ticket` FOREIGN KEY (`ticket_id`) REFERENCES `ic_ticket` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+--
+-- Table `ic_ticket_change_field`
+--
+DROP TABLE IF EXISTS `ic_ticket_change_field`;
+CREATE TABLE `ic_ticket_change_field` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `ticket_change_id` int unsigned NOT NULL,
+  `field` varchar(64) NOT NULL,
+  `old_value` text NULL,
+  `new_value` text NULL,
+  CONSTRAINT `pk_ticket_change_field` PRIMARY KEY (`id`),
+  CONSTRAINT `fk_ticket_change_field_ticket_change` FOREIGN KEY (`ticket_change_id`) REFERENCES `ic_ticket_change` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+--
 -- Table `ic_comment`
 --
 DROP TABLE IF EXISTS `ic_comment`;
