@@ -50,9 +50,16 @@
   		<one-to-many name="attachments" mapped-by="ticket" target-entity="AttachmentInfo">
   			<order-by>created</order-by>
   		</one-to-many>
-  		<one-to-many name="changes" mapped-by="ticket" target-entity="TicketChange">
+  		<one-to-many name="ticketChanges" mapped-by="ticket" target-entity="TicketChange">
   			<order-by>changeDate</order-by>
   		</one-to-many>
+  		<many-to-many name="repositoryChanges" mapped-by="tickets" target-entity="RepositoryChange">
+  			<order-by>changeDate</order-by>
+  			<join-table name="ic_repository_change_ticket">
+  				<join-column name="ticket_id"/>
+  				<inverse-join-column name="repository_change_id"/>
+  			</join-table>
+  		</many-to-many>
   	</attributes>
   </entity>
   

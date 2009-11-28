@@ -76,7 +76,7 @@
 	<div style="padding-bottom: 3px;">
 		<span style="color: navy; font-size: larger; font-weight: bold;">Changes</span>
 	</div>
-	<c:forEach var="change" items="${ticket.changes}">
+	<c:forEach var="change" items="${ticket.ticketChanges}">
 		<div style="border-top: 1px solid gray;">
 			<i>${change.username} on <fmt:formatDate value="${change.changeDate}" type="both" dateStyle="short"/></i>
 			<ul>
@@ -84,6 +84,20 @@
 					<li><b>${field.field}</b> from '${field.oldValue}' to '${field.newValue}'</li>
 				</c:forEach>
 			</ul>
+		</div>
+	</c:forEach>
+</div>
+
+<div style="padding-top: 20px;">
+	<div style="padding-bottom: 3px;">
+		<span style="color: navy; font-size: larger; font-weight: bold;">Repository Changes</span>
+	</div>
+	<c:forEach var="change" items="${ticket.repositoryChanges}">
+		<div style="border-top: 1px solid gray;">
+			<i>${change.username} on <fmt:formatDate value="${change.changeDate}" type="both" dateStyle="short"/></i>
+			<p>
+				[${change.id}] ${change.comment}
+			</p>
 		</div>
 	</c:forEach>
 </div>

@@ -7,6 +7,8 @@ import org.programmerplanet.intracollab.model.Comment;
 import org.programmerplanet.intracollab.model.Component;
 import org.programmerplanet.intracollab.model.Milestone;
 import org.programmerplanet.intracollab.model.Project;
+import org.programmerplanet.intracollab.model.RepositoryChange;
+import org.programmerplanet.intracollab.model.SourceRepository;
 import org.programmerplanet.intracollab.model.Ticket;
 import org.programmerplanet.intracollab.model.User;
 
@@ -58,5 +60,9 @@ public interface ProjectManager {
 	void saveMilestone(Milestone milestone);
 
 	void deleteMilestone(Milestone milestone);
+
+	Collection<SourceRepository> getSourceRepositories();
+
+	void saveRepositoryChanges(SourceRepository sourceRepository, Collection<RepositoryChange> repositoryChanges);
 
 }

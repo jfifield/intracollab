@@ -191,4 +191,20 @@
 		<property name="suffix" value=".jsp"/>
 	</bean>
 
+	<bean id="repositoryChangeScanTask" class="org.programmerplanet.intracollab.manager.RepositoryChangeScanTask"/>
+
+	<bean id="scheduledRepositoryChangeScanTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="delay" value="60000"/>
+		<property name="period" value="60000"/>
+		<property name="timerTask" ref="repositoryChangeScanTask"/>
+	</bean>
+
+	<bean id="timerFactory" class="org.springframework.scheduling.timer.TimerFactoryBean">
+		<property name="scheduledTimerTasks">
+			<list>
+				<ref bean="scheduledRepositoryChangeScanTask"/>
+			</list>
+		</property>
+	</bean>
+	
 </beans>

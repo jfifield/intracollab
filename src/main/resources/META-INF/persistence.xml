@@ -8,6 +8,7 @@
 	<persistence-unit name="intracollab" transaction-type="RESOURCE_LOCAL">
 		<mapping-file>META-INF/orm/User.xml</mapping-file>
 		<mapping-file>META-INF/orm/Project.xml</mapping-file>
+		<mapping-file>META-INF/orm/SourceRepository.xml</mapping-file>
 		<mapping-file>META-INF/orm/Component.xml</mapping-file>
 		<mapping-file>META-INF/orm/Milestone.xml</mapping-file>
 		<mapping-file>META-INF/orm/Ticket.xml</mapping-file>
@@ -15,6 +16,8 @@
 		<mapping-file>META-INF/orm/Attachment.xml</mapping-file>
 		<mapping-file>META-INF/orm/TicketChange.xml</mapping-file>
 		<mapping-file>META-INF/orm/TicketChangeField.xml</mapping-file>
+		<mapping-file>META-INF/orm/RepositoryChange.xml</mapping-file>
+		<mapping-file>META-INF/orm/RepositoryChangeFile.xml</mapping-file>
 	</persistence-unit>
 	
 </persistence>

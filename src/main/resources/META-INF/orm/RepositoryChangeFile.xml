@@ -7,24 +7,22 @@
   
   <package>org.programmerplanet.intracollab.model</package>
   
-  <entity class="Project">
-  	<table name="ic_project"/>
+  <entity class="RepositoryChangeFile">
+  	<table name="ic_repository_change_file"/>
   	<attributes>
   		<id name="id">
   			<column name="id"/>
   			<generated-value strategy="AUTO"/>
   		</id>
-  		<basic name="name">
-  			<column name="name"/>
+  		<basic name="filename">
+  			<column name="filename"/>
   		</basic>
-  		<basic name="description">
-  			<column name="description"/>
+  		<basic name="revision">
+  			<column name="revision"/>
   		</basic>
-  		<one-to-many name="components" mapped-by="project" target-entity="Component"/>
-  		<one-to-many name="milestones" mapped-by="project" target-entity="Milestone"/>
-  		<one-to-one name="sourceRepository" target-entity="SourceRepository" fetch="LAZY">
-  			<join-column name="source_repository_id"/>
-  		</one-to-one>
+  		<many-to-one name="repositoryChange">
+  			<join-column name="repository_change_id"/>
+  		</many-to-one>
   	</attributes>
   </entity>
   

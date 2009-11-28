@@ -12,6 +12,19 @@ CREATE TABLE `ic_user` (
 ) ENGINE=InnoDB;
 
 --
+-- Table `ic_source_repository`
+--
+DROP TABLE IF EXISTS `ic_source_repository`;
+CREATE TABLE `ic_source_repository` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `repository_type` varchar(16) NOT NULL,
+  `path` varchar(128) NOT NULL,
+  `modules` text NOT NULL,
+  `last_change_date` datetime,
+  CONSTRAINT `pk_source_repository` PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+--
 -- Table `ic_project`
 --
 DROP TABLE IF EXISTS `ic_project`;
@@ -19,7 +32,9 @@ CREATE TABLE `ic_project` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
   `description` text,
-  CONSTRAINT `pk_project` PRIMARY KEY (`id`)
+  `source_repository_id` int unsigned,
+  CONSTRAINT `pk_project` PRIMARY KEY (`id`),
+  CONSTRAINT `fk_project_source_repository` FOREIGN KEY (`source_repository_id`) REFERENCES `ic_source_repository` (`id`)
 ) ENGINE=InnoDB;
 
 --
@@ -128,6 +143,45 @@ CREATE TABLE `ic_attachment` (
   `created_by` varchar(64) NOT NULL,
   CONSTRAINT `pk_attachment` PRIMARY KEY (`id`),
   CONSTRAINT `fk_attachment_ticket` FOREIGN KEY (`ticket_id`) REFERENCES `ic_ticket` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+--
+-- Table `ic_repository_change`
+--
+DROP TABLE IF EXISTS `ic_repository_change`;
+CREATE TABLE `ic_repository_change` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `project_id` int unsigned NOT NULL,
+  `username` varchar(64) NOT NULL,
+  `change_date` datetime NOT NULL,
+  `comment` text NOT NULL,
+  CONSTRAINT `pk_repository_change` PRIMARY KEY (`id`),
+  CONSTRAINT `fk_repository_change_project` FOREIGN KEY (`project_id`) REFERENCES `ic_project` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+--
+-- Table `ic_repository_change_file`
+--
+DROP TABLE IF EXISTS `ic_repository_change_file`;
+CREATE TABLE `ic_repository_change_file` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `repository_change_id` int unsigned NOT NULL,
+  `filename` text NOT NULL,
+  `revision` varchar(16) NOT NULL,
+  CONSTRAINT `pk_repository_change_file` PRIMARY KEY (`id`),
+  CONSTRAINT `fk_repository_change_file_repository_change` FOREIGN KEY (`repository_change_id`) REFERENCES `ic_repository_change` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+--
+-- Table `ic_repository_change_ticket`
+--
+DROP TABLE IF EXISTS `ic_repository_change_ticket`;
+CREATE TABLE `ic_repository_change_ticket` (
+  `repository_change_id` int unsigned NOT NULL,
+  `ticket_id` int unsigned NOT NULL,
+  CONSTRAINT `pk_repository_change_ticket` PRIMARY KEY (`repository_change_id`, `ticket_id`),
+  CONSTRAINT `fk_repository_change_ticket_repository_change` FOREIGN KEY (`repository_change_id`) REFERENCES `ic_repository_change` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_repository_change_ticket_ticket` FOREIGN KEY (`ticket_id`) REFERENCES `ic_ticket` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 --

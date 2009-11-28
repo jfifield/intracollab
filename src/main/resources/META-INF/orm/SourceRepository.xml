@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+	xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+  version="1.0">
+  
+  <package>org.programmerplanet.intracollab.model</package>
+  
+  <entity class="SourceRepository">
+  	<table name="ic_source_repository"/>
+  	<inheritance strategy="SINGLE_TABLE"/>
+  	<discriminator-column name="repository_type"/>
+  	<attributes>
+  		<id name="id">
+  			<column name="id"/>
+  			<generated-value strategy="AUTO"/>
+  		</id>
+  		<basic name="path">
+  			<column name="path"/>
+  		</basic>
+  		<basic name="modules">
+  			<column name="modules"/>
+  		</basic>
+  		<basic name="lastChangeDate">
+  			<column name="last_change_date"/>
+  		</basic>
+  		<one-to-one name="project" mapped-by="sourceRepository" target-entity="Project"/>
+  		<transient name="repositoryChanges"/>
+  	</attributes>
+  </entity>
+
+  <entity class="CvsSourceRepository">
+  	<discriminator-value>cvs</discriminator-value>
+  	<attributes>
+  		<transient name="repositoryChanges"/>
+  		<transient name="logInformationCollection"/>
+  	</attributes>
+  </entity>
+  
+</entity-mappings>

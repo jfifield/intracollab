@@ -16,6 +16,7 @@ public class Project {
 	private String description;
 	private Set<Component> components;
 	private Set<Milestone> milestones;
+	private SourceRepository sourceRepository;
 
 	public void setId(Long id) {
 		this.id = id;
@@ -55,6 +56,14 @@ public class Project {
 
 	public Set<Milestone> getMilestones() {
 		return milestones;
+	}
+
+	public void setSourceRepository(SourceRepository sourceRepository) {
+		this.sourceRepository = sourceRepository;
+	}
+
+	public SourceRepository getSourceRepository() {
+		return sourceRepository;
 	}
 
 }

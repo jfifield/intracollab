@@ -133,6 +133,12 @@
 			<version>2.4</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.netbeans.lib</groupId>
+			<artifactId>cvsclient</artifactId>
+			<version>20060125</version>
+			<scope>compile</scope>
+		</dependency>
   </dependencies>
   <build>
     <plugins>
