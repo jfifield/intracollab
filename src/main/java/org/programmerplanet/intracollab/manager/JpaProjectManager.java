@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.programmerplanet.intracollab.model.Attachment;
+import org.programmerplanet.intracollab.model.AttachmentInfo;
 import org.programmerplanet.intracollab.model.Comment;
 import org.programmerplanet.intracollab.model.Component;
 import org.programmerplanet.intracollab.model.Milestone;
@@ -15,6 +16,7 @@ import org.programmerplanet.intracollab.model.SourceRepository;
 import org.programmerplanet.intracollab.model.Ticket;
 import org.programmerplanet.intracollab.model.TicketChange;
 import org.programmerplanet.intracollab.model.User;
+import org.programmerplanet.intracollab.util.DateRange;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 
 /**
@@ -216,6 +218,66 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 			this.getJpaTemplate().merge(repositoryChange);
 		}
 		this.getJpaTemplate().merge(sourceRepository);
+	}
+
+	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getTicketsCreatedBetween(org.programmerplanet.intracollab.model.Project, org.programmerplanet.intracollab.util.DateRange)
+	 */
+	public Collection<Ticket> getTicketsCreatedBetween(Project project, DateRange dateRange) {
+		String query = "SELECT t FROM Ticket AS t WHERE t.project = :project AND t.created BETWEEN :startDate AND :endDate";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("project", project);
+		params.put("startDate", dateRange.getStart());
+		params.put("endDate", dateRange.getEnd());
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getTicketChangesCreatedBetween(org.programmerplanet.intracollab.model.Project, org.programmerplanet.intracollab.util.DateRange)
+	 */
+	public Collection<TicketChange> getTicketChangesCreatedBetween(Project project, DateRange dateRange) {
+		String query = "SELECT tc FROM TicketChange AS tc WHERE tc.ticket.project = :project AND tc.changeDate BETWEEN :startDate AND :endDate";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("project", project);
+		params.put("startDate", dateRange.getStart());
+		params.put("endDate", dateRange.getEnd());
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getRepositoryChangesCreatedBetween(org.programmerplanet.intracollab.model.Project, org.programmerplanet.intracollab.util.DateRange)
+	 */
+	public Collection<RepositoryChange> getRepositoryChangesCreatedBetween(Project project, DateRange dateRange) {
+		String query = "SELECT rc FROM RepositoryChange AS rc WHERE rc.project = :project AND rc.changeDate BETWEEN :startDate AND :endDate";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("project", project);
+		params.put("startDate", dateRange.getStart());
+		params.put("endDate", dateRange.getEnd());
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getCommentsCreatedBetween(org.programmerplanet.intracollab.model.Project, org.programmerplanet.intracollab.util.DateRange)
+	 */
+	public Collection<Comment> getCommentsCreatedBetween(Project project, DateRange dateRange) {
+		String query = "SELECT c FROM Comment AS c WHERE c.ticket.project = :project AND c.created BETWEEN :startDate AND :endDate";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("project", project);
+		params.put("startDate", dateRange.getStart());
+		params.put("endDate", dateRange.getEnd());
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getAttachmentsCreatedBetween(org.programmerplanet.intracollab.model.Project, org.programmerplanet.intracollab.util.DateRange)
+	 */
+	public Collection<AttachmentInfo> getAttachmentsCreatedBetween(Project project, DateRange dateRange) {
+		String query = "SELECT a FROM AttachmentInfo AS a WHERE a.ticket.project = :project AND a.created BETWEEN :startDate AND :endDate";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("project", project);
+		params.put("startDate", dateRange.getStart());
+		params.put("endDate", dateRange.getEnd());
+		return this.getJpaTemplate().findByNamedParams(query, params);
 	}
 
 }

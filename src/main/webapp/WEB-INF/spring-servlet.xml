@@ -58,6 +58,8 @@
 		<property name="successView" value="redirect:/project/list.do"/>
 	</bean>
 
+	<bean id="projectActivityController" class="org.programmerplanet.intracollab.web.ProjectActivityController"/>
+
 	<bean id="componentListController" class="org.programmerplanet.intracollab.web.ComponentListController"/>
 
 	<bean id="componentValidator" class="org.programmerplanet.intracollab.web.ComponentValidator"/>
@@ -147,6 +149,7 @@
 		<property name="mappings">
 			<props>
 				<prop key="/project/list.do">projectListController</prop>
+				<prop key="/project/activity.do">projectActivityController</prop>
 				<prop key="/ticket/list.do">ticketListController</prop>
 				<prop key="/ticket/view.do">ticketViewController</prop>
 				<prop key="/ticket/edit.do">ticketEditController</prop>

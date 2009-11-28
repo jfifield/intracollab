@@ -17,6 +17,7 @@
 			<c:set var="addLink"><a href="project/edit.do">Add</a></c:set>
 		</t:administrator>
 		<display:column title="${addLink}" headerClass="shrink">
+			<a href="project/activity.do?id=${project.id}">Activity</a>
 			<a href="ticket/list.do?project_id=${project.id}">Tickets</a>
 			<t:administrator>
 				<a href="component/list.do?project_id=${project.id}">Components</a>
