@@ -20,6 +20,8 @@
 		<property name="successView" value="redirect:/admin/user/list.do"/>
 	</bean>
 
+	<bean id="adminProjectConfigurationController" class="org.programmerplanet.intracollab.web.admin.project.ProjectConfigurationController"/>
+
 	<bean id="adminProjectValidator" class="org.programmerplanet.intracollab.web.admin.project.ProjectValidator"/>
 
 	<bean id="adminProjectEditController" class="org.programmerplanet.intracollab.web.admin.project.ProjectEditController">
@@ -70,6 +72,7 @@
 			<props>
 				<prop key="/admin/user/list.do">adminUserListController</prop>
 				<prop key="/admin/user/edit.do">adminUserEditController</prop>
+				<prop key="/admin/project/configuration.do">adminProjectConfigurationController</prop>
 				<prop key="/admin/project/edit.do">adminProjectEditController</prop>
 				<prop key="/admin/component/list.do">adminComponentListController</prop>
 				<prop key="/admin/component/edit.do">adminComponentEditController</prop>
