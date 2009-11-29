@@ -78,4 +78,8 @@ public interface ProjectManager {
 
 	Collection<AttachmentInfo> getAttachmentsCreatedBetween(Project project, DateRange dateRange);
 
+	RepositoryChange getRepositoryChange(Long id);
+
+	RepositoryChange getRepositoryChange(Long id, String... fetches);
+
 }

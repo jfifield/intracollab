@@ -125,6 +125,8 @@
 
 	<bean id="attachmentDownloadController" class="org.programmerplanet.intracollab.web.AttachmentDownloadController"/>
 	
+	<bean id="repositoryChangeViewController" class="org.programmerplanet.intracollab.web.RepositoryChangeViewController"/>
+	
 	<bean id="unsecureMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
@@ -156,6 +158,7 @@
 				<prop key="/comment/edit.do">commentEditController</prop>
 				<prop key="/attachment/edit.do">attachmentEditController</prop>
 				<prop key="/attachment/download.do">attachmentDownloadController</prop>
+				<prop key="/repository_change/view.do">repositoryChangeViewController</prop>
 			</props>
 		</property>
 	</bean>

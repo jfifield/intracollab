@@ -280,4 +280,18 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 		return this.getJpaTemplate().findByNamedParams(query, params);
 	}
 
+	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getRepositoryChange(java.lang.Long)
+	 */
+	public RepositoryChange getRepositoryChange(Long id) {
+		return this.getJpaTemplate().find(RepositoryChange.class, id);
+	}
+
+	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getRepositoryChange(java.lang.Long, java.lang.String[])
+	 */
+	public RepositoryChange getRepositoryChange(Long id, String... fetches) {
+		return getWithFetches(RepositoryChange.class, id, fetches);
+	}
+
 }

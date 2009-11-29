@@ -28,11 +28,22 @@ public class MarkupTag extends BodyTagSupport {
 	private static final String TICKET_REPLACE = "<a href=\"ticket/view.do?id=$1\">#$1</a>";
 
 	/**
+	 * Repository change reference search pattern.
+	 */
+	private static final Pattern REPOSITORY_CHANGE_SEARCH = Pattern.compile("\\[(\\d+)\\]");
+
+	/**
+	 * Repository change reference replace pattern.
+	 */
+	private static final String REPOSITORY_CHANGE_REPLACE = "<a href=\"repository_change/view.do?id=$1\">[$1]</a>";
+
+	/**
 	 * @see javax.servlet.jsp.tagext.BodyTagSupport#doEndTag()
 	 */
 	public int doEndTag() throws JspException {
 		String content = bodyContent.getString();
 		content = TICKET_SEARCH.matcher(content).replaceAll(TICKET_REPLACE);
+		content = REPOSITORY_CHANGE_SEARCH.matcher(content).replaceAll(REPOSITORY_CHANGE_REPLACE);
 		try {
 			pageContext.getOut().print(content);
 		} catch (Exception e) {

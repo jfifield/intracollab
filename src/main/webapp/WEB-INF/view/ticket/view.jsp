@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="ic" uri="http://www.programmerplanet.org/intracollab" %>
 
 <tiles:insertDefinition name="default">
 <tiles:putAttribute name="content" type="string">
@@ -35,7 +36,7 @@
 		</tr>
 		<tr>
 			<td class="label">Description:</td>
-			<td colspan="3">${ticket.description}</td>
+			<td colspan="3"><ic:markup>${ticket.description}</ic:markup></td>
 		</tr>
 	</table>
 
@@ -51,7 +52,7 @@
 			<a href="attachment/download.do?id=${attachment.id}">${attachment.fileName}</a> (${attachment.fileSize} bytes)
 			<i>${attachment.createdBy} on <fmt:formatDate value="${attachment.created}" type="both" dateStyle="short"/></i>
 			<p>
-				${attachment.description}
+				<ic:markup>${attachment.description}</ic:markup>
 			</p>
 		</div>
 	</c:forEach>
@@ -66,7 +67,7 @@
 		<div style="border-top: 1px solid gray;">
 			<i>${comment.createdBy} on <fmt:formatDate value="${comment.created}" type="both" dateStyle="short"/></i>
 			<p>
-				${comment.content}
+				<ic:markup>${comment.content}</ic:markup>
 			</p>
 		</div>
 	</c:forEach>
@@ -96,7 +97,7 @@
 		<div style="border-top: 1px solid gray;">
 			<i>${change.username} on <fmt:formatDate value="${change.changeDate}" type="both" dateStyle="short"/></i>
 			<p>
-				[${change.id}] ${change.comment}
+				<ic:markup>[${change.id}] ${change.comment}</ic:markup>
 			</p>
 		</div>
 	</c:forEach>
