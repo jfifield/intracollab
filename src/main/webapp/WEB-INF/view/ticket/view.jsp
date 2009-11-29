@@ -29,6 +29,12 @@
 			<td>${ticket.priority.title}</td>
 		</tr>
 		<tr>
+			<td class="label">Milestone:</td>
+			<td><a href="milestone/view.do?id=${ticket.milestone.id}">${ticket.milestone.name}</a></td>
+			<td class="label">Component:</td>
+			<td>${ticket.component.name}</td>
+		</tr>
+		<tr>
 			<td class="label">Created:</td>
 			<td><fmt:formatDate value="${ticket.created}" type="date" dateStyle="short"/></td>
 			<td class="label">Created By:</td>

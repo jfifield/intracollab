@@ -97,6 +97,11 @@ public class TicketEditController extends SimpleMultiActionFormController {
 			Long projectId = ServletRequestUtils.getLongParameter(request, "project_id");
 			Project project = projectManager.getProject(projectId);
 			ticket.setProject(project);
+			Long milestoneId = ServletRequestUtils.getLongParameter(request, "milestone");
+			if (milestoneId != null) {
+				Milestone milestone = projectManager.getMilestone(milestoneId);
+				ticket.setMilestone(milestone);
+			}
 			ticket.setCreated(new Date());
 			UserSession userSession = UserSession.getUserSession(request);
 			User user = userSession.getUser();

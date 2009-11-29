@@ -78,6 +78,8 @@
 	<bean id="attachmentDownloadController" class="org.programmerplanet.intracollab.web.attachment.AttachmentDownloadController"/>
 	
 	<bean id="repositoryChangeViewController" class="org.programmerplanet.intracollab.web.repositorychange.RepositoryChangeViewController"/>
+
+	<bean id="milestoneViewController" class="org.programmerplanet.intracollab.web.milestone.MilestoneViewController"/>
 	
 	<bean id="unsecureMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
@@ -109,6 +111,7 @@
 				<prop key="/attachment/edit.do">attachmentEditController</prop>
 				<prop key="/attachment/download.do">attachmentDownloadController</prop>
 				<prop key="/repository_change/view.do">repositoryChangeViewController</prop>
+				<prop key="/milestone/view.do">milestoneViewController</prop>
 			</props>
 		</property>
 	</bean>

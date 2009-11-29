@@ -38,6 +38,8 @@ public interface ProjectManager {
 
 	Collection<Ticket> getTickets(Project project);
 
+	Collection<Ticket> getTickets(Milestone milestone);
+
 	Ticket getTicket(Long id);
 
 	Ticket getTicket(Long id, String... fetches);

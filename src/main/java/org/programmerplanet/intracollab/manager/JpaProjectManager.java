@@ -89,6 +89,17 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 	}
 
 	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getTickets(org.programmerplanet.intracollab.model.Milestone)
+	 */
+	public Collection<Ticket> getTickets(Milestone milestone) {
+		String query = "SELECT t FROM Ticket AS t WHERE t.milestone = :milestone";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("milestone", milestone);
+		List list = this.getJpaTemplate().findByNamedParams(query, params);
+		return list;
+	}
+
+	/**
 	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getTicket(java.lang.Long)
 	 */
 	public Ticket getTicket(Long id) {
