@@ -1,10 +1,10 @@
-package org.programmerplanet.intracollab.web;
+package org.programmerplanet.intracollab.web.repositorychange;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.programmerplanet.intracollab.manager.ProjectManager;
-import org.programmerplanet.intracollab.model.Ticket;
+import org.programmerplanet.intracollab.model.RepositoryChange;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.Controller;
  * 
  * Copyright (c) 2009 Joseph Fifield
  */
-public class TicketViewController implements Controller {
+public class RepositoryChangeViewController implements Controller {
 
 	private ProjectManager projectManager;
 
@@ -29,8 +29,8 @@ public class TicketViewController implements Controller {
 	 */
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Long id = ServletRequestUtils.getLongParameter(request, "id");
-		Ticket ticket = projectManager.getTicket(id, "comments", "attachments", "ticketChanges", "repositoryChanges");
-		return new ModelAndView("ticket/view", "ticket", ticket);
+		RepositoryChange repositoryChange = projectManager.getRepositoryChange(id, "files");
+		return new ModelAndView("repository_change/view", "repositoryChange", repositoryChange);
 	}
 
 }

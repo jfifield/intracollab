@@ -1,4 +1,4 @@
-package org.programmerplanet.intracollab.web;
+package org.programmerplanet.intracollab.web.ticket;
 
 import java.util.Collection;
 import java.util.Date;
@@ -18,6 +18,7 @@ import org.programmerplanet.intracollab.model.User;
 import org.programmerplanet.intracollab.propertyeditors.ComponentPropertyEditor;
 import org.programmerplanet.intracollab.propertyeditors.MilestonePropertyEditor;
 import org.programmerplanet.intracollab.propertyeditors.UserPropertyEditor;
+import org.programmerplanet.intracollab.web.UserSession;
 import org.programmerplanet.intracollab.web.spring.SimpleMultiActionFormController;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;

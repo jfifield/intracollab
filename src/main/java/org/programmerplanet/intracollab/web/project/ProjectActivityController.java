@@ -1,4 +1,4 @@
-package org.programmerplanet.intracollab.web;
+package org.programmerplanet.intracollab.web.project;
 
 import java.util.Calendar;
 import java.util.Collection;
@@ -21,6 +21,11 @@ import org.programmerplanet.intracollab.model.RepositoryChange;
 import org.programmerplanet.intracollab.model.Ticket;
 import org.programmerplanet.intracollab.model.TicketChange;
 import org.programmerplanet.intracollab.util.DateRange;
+import org.programmerplanet.intracollab.web.attachment.AttachmentActivityItem;
+import org.programmerplanet.intracollab.web.comment.CommentActivityItem;
+import org.programmerplanet.intracollab.web.repositorychange.RepositoryChangeActivityItem;
+import org.programmerplanet.intracollab.web.ticket.TicketActivityItem;
+import org.programmerplanet.intracollab.web.ticketchange.TicketChangeActivityItem;
 import org.springframework.beans.support.PropertyComparator;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;

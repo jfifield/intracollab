@@ -1,4 +1,4 @@
-package org.programmerplanet.intracollab.web;
+package org.programmerplanet.intracollab.web.attachment;
 
 import org.springframework.web.multipart.MultipartFile;
 

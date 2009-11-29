@@ -1,4 +1,4 @@
-package org.programmerplanet.intracollab.web;
+package org.programmerplanet.intracollab.web.comment;
 
 import org.programmerplanet.intracollab.model.Comment;
 import org.springframework.validation.BindException;

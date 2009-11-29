@@ -1,4 +1,4 @@
-package org.programmerplanet.intracollab.web;
+package org.programmerplanet.intracollab.web.attachment;
 
 import org.easymock.EasyMock;
 import org.springframework.validation.BindException;

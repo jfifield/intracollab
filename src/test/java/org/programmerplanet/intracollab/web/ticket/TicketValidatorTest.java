@@ -1,4 +1,4 @@
-package org.programmerplanet.intracollab.web;
+package org.programmerplanet.intracollab.web.ticket;
 
 import org.programmerplanet.intracollab.model.Ticket;
 import org.springframework.validation.BindException;

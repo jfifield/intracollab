@@ -34,17 +34,17 @@
 		<property name="loginView" value="redirect:/login.do"/>
 	</bean>
 
-	<bean id="projectListController" class="org.programmerplanet.intracollab.web.ProjectListController"/>
+	<bean id="projectListController" class="org.programmerplanet.intracollab.web.project.ProjectListController"/>
 
-	<bean id="projectActivityController" class="org.programmerplanet.intracollab.web.ProjectActivityController"/>
+	<bean id="projectActivityController" class="org.programmerplanet.intracollab.web.project.ProjectActivityController"/>
 
-	<bean id="ticketListController" class="org.programmerplanet.intracollab.web.TicketListController"/>
+	<bean id="ticketListController" class="org.programmerplanet.intracollab.web.ticket.TicketListController"/>
 
-	<bean id="ticketViewController" class="org.programmerplanet.intracollab.web.TicketViewController"/>
+	<bean id="ticketViewController" class="org.programmerplanet.intracollab.web.ticket.TicketViewController"/>
 
-	<bean id="ticketValidator" class="org.programmerplanet.intracollab.web.TicketValidator"/>
+	<bean id="ticketValidator" class="org.programmerplanet.intracollab.web.ticket.TicketValidator"/>
 
-	<bean id="ticketEditController" class="org.programmerplanet.intracollab.web.TicketEditController">
+	<bean id="ticketEditController" class="org.programmerplanet.intracollab.web.ticket.TicketEditController">
 		<property name="sessionForm" value="false"/>
 		<property name="commandName" value="ticket"/>
 		<property name="commandClass" value="org.programmerplanet.intracollab.model.Ticket"/>
@@ -53,9 +53,9 @@
 		<property name="successView" value="redirect:/ticket/list.do"/>
 	</bean>
 
-	<bean id="commentValidator" class="org.programmerplanet.intracollab.web.CommentValidator"/>
+	<bean id="commentValidator" class="org.programmerplanet.intracollab.web.comment.CommentValidator"/>
 
-	<bean id="commentEditController" class="org.programmerplanet.intracollab.web.CommentEditController">
+	<bean id="commentEditController" class="org.programmerplanet.intracollab.web.comment.CommentEditController">
 		<property name="sessionForm" value="false"/>
 		<property name="commandName" value="comment"/>
 		<property name="commandClass" value="org.programmerplanet.intracollab.model.Comment"/>
@@ -64,20 +64,20 @@
 		<property name="successView" value="redirect:/ticket/view.do"/>
 	</bean>
 
-	<bean id="attachmentFormValidator" class="org.programmerplanet.intracollab.web.AttachmentFormValidator"/>
+	<bean id="attachmentFormValidator" class="org.programmerplanet.intracollab.web.attachment.AttachmentFormValidator"/>
 
-	<bean id="attachmentEditController" class="org.programmerplanet.intracollab.web.AttachmentEditController">
+	<bean id="attachmentEditController" class="org.programmerplanet.intracollab.web.attachment.AttachmentEditController">
 		<property name="sessionForm" value="false"/>
 		<property name="commandName" value="attachment"/>
-		<property name="commandClass" value="org.programmerplanet.intracollab.web.AttachmentForm"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.web.attachment.AttachmentForm"/>
 		<property name="validator" ref="attachmentFormValidator"/>
 		<property name="formView" value="attachment/edit"/>
 		<property name="successView" value="redirect:/ticket/view.do"/>
 	</bean>
 
-	<bean id="attachmentDownloadController" class="org.programmerplanet.intracollab.web.AttachmentDownloadController"/>
+	<bean id="attachmentDownloadController" class="org.programmerplanet.intracollab.web.attachment.AttachmentDownloadController"/>
 	
-	<bean id="repositoryChangeViewController" class="org.programmerplanet.intracollab.web.RepositoryChangeViewController"/>
+	<bean id="repositoryChangeViewController" class="org.programmerplanet.intracollab.web.repositorychange.RepositoryChangeViewController"/>
 	
 	<bean id="unsecureMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
