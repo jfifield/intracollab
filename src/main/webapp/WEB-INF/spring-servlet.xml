@@ -7,6 +7,8 @@
 		"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
 	default-autowire="byName">
 
+	<import resource="spring-servlet-admin.xml"/>
+
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basename" value="messages"/>
 	</bean>
@@ -32,59 +34,9 @@
 		<property name="loginView" value="redirect:/login.do"/>
 	</bean>
 
-	<bean id="userListController" class="org.programmerplanet.intracollab.web.UserListController"/>
-
-	<bean id="userFormValidator" class="org.programmerplanet.intracollab.web.UserFormValidator"/>
-
-	<bean id="userEditController" class="org.programmerplanet.intracollab.web.UserEditController">
-		<property name="sessionForm" value="false"/>
-		<property name="commandName" value="user"/>
-		<property name="commandClass" value="org.programmerplanet.intracollab.web.UserForm"/>
-		<property name="validator" ref="userFormValidator"/>
-		<property name="formView" value="user/edit"/>
-		<property name="successView" value="redirect:/user/list.do"/>
-	</bean>
-
 	<bean id="projectListController" class="org.programmerplanet.intracollab.web.ProjectListController"/>
 
-	<bean id="projectValidator" class="org.programmerplanet.intracollab.web.ProjectValidator"/>
-
-	<bean id="projectEditController" class="org.programmerplanet.intracollab.web.ProjectEditController">
-		<property name="sessionForm" value="false"/>
-		<property name="commandName" value="project"/>
-		<property name="commandClass" value="org.programmerplanet.intracollab.model.Project"/>
-		<property name="validator" ref="projectValidator"/>
-		<property name="formView" value="project/edit"/>
-		<property name="successView" value="redirect:/project/list.do"/>
-	</bean>
-
 	<bean id="projectActivityController" class="org.programmerplanet.intracollab.web.ProjectActivityController"/>
-
-	<bean id="componentListController" class="org.programmerplanet.intracollab.web.ComponentListController"/>
-
-	<bean id="componentValidator" class="org.programmerplanet.intracollab.web.ComponentValidator"/>
-
-	<bean id="componentEditController" class="org.programmerplanet.intracollab.web.ComponentEditController">
-		<property name="sessionForm" value="false"/>
-		<property name="commandName" value="component"/>
-		<property name="commandClass" value="org.programmerplanet.intracollab.model.Component"/>
-		<property name="validator" ref="componentValidator"/>
-		<property name="formView" value="component/edit"/>
-		<property name="successView" value="redirect:/component/list.do"/>
-	</bean>
-
-	<bean id="milestoneListController" class="org.programmerplanet.intracollab.web.MilestoneListController"/>
-
-	<bean id="milestoneValidator" class="org.programmerplanet.intracollab.web.MilestoneValidator"/>
-
-	<bean id="milestoneEditController" class="org.programmerplanet.intracollab.web.MilestoneEditController">
-		<property name="sessionForm" value="false"/>
-		<property name="commandName" value="milestone"/>
-		<property name="commandClass" value="org.programmerplanet.intracollab.model.Milestone"/>
-		<property name="validator" ref="milestoneValidator"/>
-		<property name="formView" value="milestone/edit"/>
-		<property name="successView" value="redirect:/milestone/list.do"/>
-	</bean>
 
 	<bean id="ticketListController" class="org.programmerplanet.intracollab.web.TicketListController"/>
 
@@ -140,8 +92,6 @@
 		<property name="loginView" value="redirect:/login.do"/>
 	</bean>
 
-	<bean id="administrationInterceptor" class="org.programmerplanet.intracollab.web.AdministrationInterceptor"/>
-
 	<bean id="secureMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="interceptors">
 			<list>
@@ -159,26 +109,6 @@
 				<prop key="/attachment/edit.do">attachmentEditController</prop>
 				<prop key="/attachment/download.do">attachmentDownloadController</prop>
 				<prop key="/repository_change/view.do">repositoryChangeViewController</prop>
-			</props>
-		</property>
-	</bean>
-
-	<bean id="secureAdministrationMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-		<property name="interceptors">
-			<list>
-				<ref bean="authenticationInterceptor"/>
-				<ref bean="administrationInterceptor"/>
-			</list>
-		</property>
-		<property name="mappings">
-			<props>
-				<prop key="/user/list.do">userListController</prop>
-				<prop key="/user/edit.do">userEditController</prop>
-				<prop key="/project/edit.do">projectEditController</prop>
-				<prop key="/component/list.do">componentListController</prop>
-				<prop key="/component/edit.do">componentEditController</prop>
-				<prop key="/milestone/list.do">milestoneListController</prop>
-				<prop key="/milestone/edit.do">milestoneEditController</prop>
 			</props>
 		</property>
 	</bean>

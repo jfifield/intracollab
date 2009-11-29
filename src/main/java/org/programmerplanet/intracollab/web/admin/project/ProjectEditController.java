@@ -1,12 +1,11 @@
-package org.programmerplanet.intracollab.web;
+package org.programmerplanet.intracollab.web.admin.project;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.programmerplanet.intracollab.manager.UserManager;
-import org.programmerplanet.intracollab.model.User;
+import org.programmerplanet.intracollab.manager.ProjectManager;
+import org.programmerplanet.intracollab.model.Project;
 import org.programmerplanet.intracollab.web.spring.SimpleMultiActionFormController;
-import org.springframework.beans.BeanUtils;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,34 +18,23 @@ import org.springframework.web.util.WebUtils;
  * 
  * Copyright (c) 2009 Joseph Fifield
  */
-public class UserEditController extends SimpleMultiActionFormController {
+public class ProjectEditController extends SimpleMultiActionFormController {
 
-	private UserManager userManager;
+	private ProjectManager projectManager;
 
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
+	public void setProjectManager(ProjectManager projectManager) {
+		this.projectManager = projectManager;
 	}
 
 	public ModelAndView save(HttpServletRequest request, HttpServletResponse response, Object command, BindException errors) throws Exception {
-		UserForm userForm = (UserForm)command;
-		User user = null;
-		if (userForm.getId() != null) {
-			user = userManager.getUser(userForm.getId());
-		} else {
-			user = new User();
-		}
-		BeanUtils.copyProperties(userForm, user);
-		String password = userForm.getPassword1();
-		password = User.getPasswordHash(password);
-		user.setPassword(password);
-		userManager.saveUser(user);
+		Project project = (Project) command;
+		projectManager.saveProject(project);
 		return new ModelAndView(this.getSuccessView());
 	}
 
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, Object command, BindException errors) throws Exception {
-		UserForm userForm = (UserForm)command;
-		User user = userManager.getUser(userForm.getId());
-		userManager.deleteUser(user);
+		Project project = (Project) command;
+		projectManager.deleteProject(project);
 		return new ModelAndView(this.getSuccessView());
 	}
 
@@ -65,13 +53,12 @@ public class UserEditController extends SimpleMultiActionFormController {
 	 * @see org.springframework.web.servlet.mvc.AbstractFormController#formBackingObject(javax.servlet.http.HttpServletRequest)
 	 */
 	protected Object formBackingObject(HttpServletRequest request) throws Exception {
-		UserForm userForm = new UserForm();
 		Long id = ServletRequestUtils.getLongParameter(request, "id");
 		if (id != null) {
-			User user = userManager.getUser(id);
-			BeanUtils.copyProperties(user, userForm);
+			return projectManager.getProject(id);
+		} else {
+			return new Project();
 		}
-		return userForm;
 	}
 
 }

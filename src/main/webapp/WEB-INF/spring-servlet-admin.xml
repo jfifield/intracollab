@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation=
+		"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+	default-autowire="byName">
+
+	<bean id="adminUserListController" class="org.programmerplanet.intracollab.web.admin.user.UserListController"/>
+
+	<bean id="adminUserFormValidator" class="org.programmerplanet.intracollab.web.admin.user.UserFormValidator"/>
+
+	<bean id="adminUserEditController" class="org.programmerplanet.intracollab.web.admin.user.UserEditController">
+		<property name="sessionForm" value="false"/>
+		<property name="commandName" value="user"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.web.admin.user.UserForm"/>
+		<property name="validator" ref="adminUserFormValidator"/>
+		<property name="formView" value="admin/user/edit"/>
+		<property name="successView" value="redirect:/admin/user/list.do"/>
+	</bean>
+
+	<bean id="adminProjectValidator" class="org.programmerplanet.intracollab.web.admin.project.ProjectValidator"/>
+
+	<bean id="adminProjectEditController" class="org.programmerplanet.intracollab.web.admin.project.ProjectEditController">
+		<property name="sessionForm" value="false"/>
+		<property name="commandName" value="project"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.model.Project"/>
+		<property name="validator" ref="adminProjectValidator"/>
+		<property name="formView" value="admin/project/edit"/>
+		<property name="successView" value="redirect:/project/list.do"/>
+	</bean>
+
+	<bean id="adminComponentListController" class="org.programmerplanet.intracollab.web.admin.component.ComponentListController"/>
+
+	<bean id="adminComponentValidator" class="org.programmerplanet.intracollab.web.admin.component.ComponentValidator"/>
+
+	<bean id="adminComponentEditController" class="org.programmerplanet.intracollab.web.admin.component.ComponentEditController">
+		<property name="sessionForm" value="false"/>
+		<property name="commandName" value="component"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.model.Component"/>
+		<property name="validator" ref="adminComponentValidator"/>
+		<property name="formView" value="admin/component/edit"/>
+		<property name="successView" value="redirect:/admin/component/list.do"/>
+	</bean>
+
+	<bean id="adminMilestoneListController" class="org.programmerplanet.intracollab.web.admin.milestone.MilestoneListController"/>
+
+	<bean id="adminMilestoneValidator" class="org.programmerplanet.intracollab.web.admin.milestone.MilestoneValidator"/>
+
+	<bean id="adminMilestoneEditController" class="org.programmerplanet.intracollab.web.admin.milestone.MilestoneEditController">
+		<property name="sessionForm" value="false"/>
+		<property name="commandName" value="milestone"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.model.Milestone"/>
+		<property name="validator" ref="adminMilestoneValidator"/>
+		<property name="formView" value="admin/milestone/edit"/>
+		<property name="successView" value="redirect:/admin/milestone/list.do"/>
+	</bean>
+	
+	<bean id="administrationInterceptor" class="org.programmerplanet.intracollab.web.admin.AdministrationInterceptor"/>
+
+	<bean id="adminMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="authenticationInterceptor"/>
+				<ref bean="administrationInterceptor"/>
+			</list>
+		</property>
+		<property name="mappings">
+			<props>
+				<prop key="/admin/user/list.do">adminUserListController</prop>
+				<prop key="/admin/user/edit.do">adminUserEditController</prop>
+				<prop key="/admin/project/edit.do">adminProjectEditController</prop>
+				<prop key="/admin/component/list.do">adminComponentListController</prop>
+				<prop key="/admin/component/edit.do">adminComponentEditController</prop>
+				<prop key="/admin/milestone/list.do">adminMilestoneListController</prop>
+				<prop key="/admin/milestone/edit.do">adminMilestoneEditController</prop>
+			</props>
+		</property>
+	</bean>
+	
+</beans>

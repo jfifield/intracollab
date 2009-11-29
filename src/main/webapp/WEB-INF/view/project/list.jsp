@@ -14,15 +14,15 @@
 		<display:column title="Description" property="description" sortable="true"/>
 		<c:set var="addLink" value=""/>
 		<t:administrator>
-			<c:set var="addLink"><a href="project/edit.do">Add</a></c:set>
+			<c:set var="addLink"><a href="admin/project/edit.do">Add</a></c:set>
 		</t:administrator>
 		<display:column title="${addLink}" headerClass="shrink">
 			<a href="project/activity.do?id=${project.id}">Activity</a>
 			<a href="ticket/list.do?project_id=${project.id}">Tickets</a>
 			<t:administrator>
-				<a href="component/list.do?project_id=${project.id}">Components</a>
-				<a href="milestone/list.do?project_id=${project.id}">Milestones</a>
-				<a href="project/edit.do?id=${project.id}">Edit</a>
+				<a href="admin/component/list.do?project_id=${project.id}">Components</a>
+				<a href="admin/milestone/list.do?project_id=${project.id}">Milestones</a>
+				<a href="admin/project/edit.do?id=${project.id}">Edit</a>
 			</t:administrator>
 		</display:column>
 	</display:table>

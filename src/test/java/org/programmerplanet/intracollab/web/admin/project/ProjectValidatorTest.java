@@ -1,4 +1,4 @@
-package org.programmerplanet.intracollab.web;
+package org.programmerplanet.intracollab.web.admin.project;
 
 import org.easymock.EasyMock;
 import org.programmerplanet.intracollab.manager.ProjectManager;

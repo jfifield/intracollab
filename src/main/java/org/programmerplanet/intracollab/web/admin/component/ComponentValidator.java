@@ -1,7 +1,7 @@
-package org.programmerplanet.intracollab.web;
+package org.programmerplanet.intracollab.web.admin.component;
 
 import org.apache.commons.lang.StringUtils;
-import org.programmerplanet.intracollab.model.Milestone;
+import org.programmerplanet.intracollab.model.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -12,23 +12,18 @@ import org.springframework.validation.Validator;
  * 
  * Copyright (c) 2009 Joseph Fifield
  */
-public class MilestoneValidator implements Validator {
+public class ComponentValidator implements Validator {
 
 	public boolean supports(Class clazz) {
-		return clazz.equals(Milestone.class);
+		return clazz.equals(Component.class);
 	}
 
 	public void validate(Object obj, Errors errors) {
-		Milestone milestone = (Milestone)obj;
+		Component component = (Component)obj;
 
 		// name is required
-		if (StringUtils.isEmpty(milestone.getName())) {
+		if (StringUtils.isEmpty(component.getName())) {
 			errors.rejectValue("name", "error.required");
-		}
-
-		// due date is required
-		if (milestone.getDueDate() == null) {
-			errors.rejectValue("dueDate", "error.required");
 		}
 	}
 

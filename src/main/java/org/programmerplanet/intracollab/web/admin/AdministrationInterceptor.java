@@ -1,8 +1,10 @@
-package org.programmerplanet.intracollab.web;
+package org.programmerplanet.intracollab.web.admin;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.programmerplanet.intracollab.web.AuthorizationException;
+import org.programmerplanet.intracollab.web.UserSession;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**

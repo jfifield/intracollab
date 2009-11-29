@@ -14,9 +14,9 @@
 		<display:column title="Administrator" sortable="true">
 			<c:if test="${user.administrator}">Yes</c:if>
 		</display:column>
-		<c:set var="addLink"><a href="user/edit.do">Add</a></c:set>
+		<c:set var="addLink"><a href="admin/user/edit.do">Add</a></c:set>
 		<display:column title="${addLink}" headerClass="shrink">
-			<a href="user/edit.do?id=${user.id}">Edit</a>
+			<a href="admin/user/edit.do?id=${user.id}">Edit</a>
 		</display:column>
 	</display:table>
 

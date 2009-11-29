@@ -1,4 +1,4 @@
-package org.programmerplanet.intracollab.web;
+package org.programmerplanet.intracollab.web.admin.project;
 
 import org.apache.commons.lang.StringUtils;
 import org.programmerplanet.intracollab.manager.ProjectManager;

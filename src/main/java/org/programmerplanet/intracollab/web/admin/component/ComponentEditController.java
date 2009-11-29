@@ -1,18 +1,13 @@
-package org.programmerplanet.intracollab.web;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+package org.programmerplanet.intracollab.web.admin.component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.programmerplanet.intracollab.manager.ProjectManager;
-import org.programmerplanet.intracollab.model.Milestone;
 import org.programmerplanet.intracollab.model.Project;
+import org.programmerplanet.intracollab.model.Component;
 import org.programmerplanet.intracollab.web.spring.SimpleMultiActionFormController;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.validation.BindException;
-import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
@@ -24,7 +19,7 @@ import org.springframework.web.util.WebUtils;
  * 
  * Copyright (c) 2009 Joseph Fifield
  */
-public class MilestoneEditController extends SimpleMultiActionFormController {
+public class ComponentEditController extends SimpleMultiActionFormController {
 
 	private ProjectManager projectManager;
 
@@ -32,29 +27,21 @@ public class MilestoneEditController extends SimpleMultiActionFormController {
 		this.projectManager = projectManager;
 	}
 
-	/**
-	 * @see org.springframework.web.servlet.mvc.BaseCommandController#initBinder(javax.servlet.http.HttpServletRequest, org.springframework.web.bind.ServletRequestDataBinder)
-	 */
-	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
-		super.initBinder(request, binder);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("MM/dd/yyyy"), true));
-	}
-
 	public ModelAndView save(HttpServletRequest request, HttpServletResponse response, Object command, BindException errors) throws Exception {
-		Milestone milestone = (Milestone)command;
-		projectManager.saveMilestone(milestone);
-		return new ModelAndView(this.getSuccessView(), "project_id", milestone.getProject().getId());
+		Component component = (Component)command;
+		projectManager.saveComponent(component);
+		return new ModelAndView(this.getSuccessView(), "project_id", component.getProject().getId());
 	}
 
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, Object command, BindException errors) throws Exception {
-		Milestone milestone = (Milestone)command;
-		projectManager.deleteMilestone(milestone);
-		return new ModelAndView(this.getSuccessView(), "project_id", milestone.getProject().getId());
+		Component component = (Component)command;
+		projectManager.deleteComponent(component);
+		return new ModelAndView(this.getSuccessView(), "project_id", component.getProject().getId());
 	}
 
 	public ModelAndView cancel(HttpServletRequest request, HttpServletResponse response, Object command, BindException errors) throws Exception {
-		Milestone milestone = (Milestone)command;
-		return new ModelAndView(this.getSuccessView(), "project_id", milestone.getProject().getId());
+		Component component = (Component)command;
+		return new ModelAndView(this.getSuccessView(), "project_id", component.getProject().getId());
 	}
 
 	/**
@@ -70,13 +57,13 @@ public class MilestoneEditController extends SimpleMultiActionFormController {
 	protected Object formBackingObject(HttpServletRequest request) throws Exception {
 		Long id = ServletRequestUtils.getLongParameter(request, "id");
 		if (id != null) {
-			return projectManager.getMilestone(id);
+			return projectManager.getComponent(id);
 		} else {
-			Milestone milestone = new Milestone();
+			Component component = new Component();
 			Long projectId = ServletRequestUtils.getLongParameter(request, "project_id");
 			Project project = projectManager.getProject(projectId);
-			milestone.setProject(project);
-			return milestone;
+			component.setProject(project);
+			return component;
 		}
 	}
 

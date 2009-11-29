@@ -10,9 +10,9 @@
 	<display:table id="component" name="project.components" class="list" style="width:90%;" defaultsort="1" defaultorder="ascending" pagesize="25" sort="list">
 		<display:caption>${project.name}: Components</display:caption>
 		<display:column title="Name" property="name" sortable="true"/>
-		<c:set var="addLink"><a href="component/edit.do?project_id=${project.id}">Add</a></c:set>
+		<c:set var="addLink"><a href="admin/component/edit.do?project_id=${project.id}">Add</a></c:set>
 		<display:column title="${addLink}" headerClass="shrink">
-			<a href="component/edit.do?id=${component.id}">Edit</a>
+			<a href="admin/component/edit.do?id=${component.id}">Edit</a>
 		</display:column>
 	</display:table>
 

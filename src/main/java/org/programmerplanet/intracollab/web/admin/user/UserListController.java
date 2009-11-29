@@ -1,4 +1,4 @@
-package org.programmerplanet.intracollab.web;
+package org.programmerplanet.intracollab.web.admin.user;
 
 import java.util.Collection;
 
@@ -30,7 +30,7 @@ public class UserListController implements Controller {
 	 */
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Collection<User> users = userManager.getUsers();
-		return new ModelAndView("user/list", "users", users);
+		return new ModelAndView("admin/user/list", "users", users);
 	}
 
 }

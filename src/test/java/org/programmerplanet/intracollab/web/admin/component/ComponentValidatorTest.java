@@ -1,4 +1,4 @@
-package org.programmerplanet.intracollab.web;
+package org.programmerplanet.intracollab.web.admin.component;
 
 import org.programmerplanet.intracollab.model.Component;
 import org.springframework.validation.BindException;

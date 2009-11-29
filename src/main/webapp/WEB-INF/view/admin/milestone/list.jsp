@@ -14,9 +14,9 @@
 		<display:column title="Completed" sortable="true">
 			<c:if test="${milestone.completed}">Yes</c:if>
 		</display:column>
-		<c:set var="addLink"><a href="milestone/edit.do?project_id=${project.id}">Add</a></c:set>
+		<c:set var="addLink"><a href="admin/milestone/edit.do?project_id=${project.id}">Add</a></c:set>
 		<display:column title="${addLink}" headerClass="shrink">
-			<a href="milestone/edit.do?id=${milestone.id}">Edit</a>
+			<a href="admin/milestone/edit.do?id=${milestone.id}">Edit</a>
 		</display:column>
 	</display:table>
 

@@ -7,7 +7,7 @@
 	<a href="project/list.do">Projects</a>
 	<t:administrator>
 		&nbsp;&nbsp;
-		<a href="user/list.do">Users</a>
+		<a href="admin/user/list.do">Users</a>
 	</t:administrator>
 	&nbsp;&nbsp;|&nbsp;&nbsp;
 	<a href="logout.do">Logout</a>

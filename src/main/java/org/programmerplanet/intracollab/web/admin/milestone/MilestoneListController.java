@@ -1,4 +1,4 @@
-package org.programmerplanet.intracollab.web;
+package org.programmerplanet.intracollab.web.admin.milestone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.Controller;
  * 
  * Copyright (c) 2009 Joseph Fifield
  */
-public class ComponentListController implements Controller {
+public class MilestoneListController implements Controller {
 
 	private ProjectManager projectManager;
 
@@ -29,8 +29,8 @@ public class ComponentListController implements Controller {
 	 */
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Long projectId = ServletRequestUtils.getLongParameter(request, "project_id");
-		Project project = projectManager.getProject(projectId, "components");
-		return new ModelAndView("component/list", "project", project);
+		Project project = projectManager.getProject(projectId, "milestones");
+		return new ModelAndView("admin/milestone/list", "project", project);
 	}
 
 }
