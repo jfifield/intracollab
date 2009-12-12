@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.programmerplanet.intracollab.manager.ProjectManager;
 import org.programmerplanet.intracollab.model.Project;
 import org.programmerplanet.intracollab.model.Component;
+import org.programmerplanet.intracollab.web.ServletRequestUtils;
 import org.programmerplanet.intracollab.web.spring.SimpleMultiActionFormController;
 import org.springframework.validation.BindException;
-import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 

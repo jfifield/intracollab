@@ -5,10 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.programmerplanet.intracollab.manager.UserManager;
 import org.programmerplanet.intracollab.model.User;
+import org.programmerplanet.intracollab.web.ServletRequestUtils;
 import org.programmerplanet.intracollab.web.spring.SimpleMultiActionFormController;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.BindException;
-import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
