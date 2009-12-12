@@ -4,6 +4,7 @@
 <%@ taglib prefix="display" uri="http://displaytag.sf.net" %>
 
 <tiles:insertDefinition name="default">
+<tiles:putAttribute name="tab" value="projects"/>
 <tiles:putAttribute name="content" type="string">
 
 <h4>${milestone.project.name}: Milestone ${milestone.name}</h4>

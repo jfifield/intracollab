@@ -2,6 +2,78 @@ BODY, INPUT, TEXTAREA {
 	background-color: white;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 11px;
+	margin: 0;
+	padding: 0;
+}
+
+#layout {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#header {
+	background-image: url(images/header_bg.gif);
+	height: 44px;
+	border-bottom: 1px solid white;
+}
+
+#header #title {
+	color: white;
+	font-size: 36px;
+	font-style: italic;
+	letter-spacing: -0.05em;
+}
+
+#menubar {
+	background-image: url(images/menu_bg.gif);
+	height: 20px;
+}
+
+#menubar ul {
+	height: 20px;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#menubar ul li {
+	float: left;
+	font-size: 11px;
+	font-weight: bold;
+	color: white;
+	line-height: 20px;
+}
+
+#menubar .left {
+	float: left;
+}
+
+#menubar .right {
+	float: right;
+}
+
+#menubar ul li a {
+	color: white;
+	padding-left: 14px;
+	padding-right: 14px;
+	text-decoration: none;
+	display: block;
+}
+
+#menubar ul li a:hover, #menubar ul li.active a {
+	background-image: url(images/menu_active_bg.gif);
+	color: black;
+}
+
+#shadow {
+	height: 5px;
+	background-image: url(images/shadow.png);
+	_background-image: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/shadow.png',sizingMethod='scale');
+}
+
+#content {
+	padding: 10px;
 }
 
 INPUT, SELECT, TEXTAREA {
@@ -20,12 +92,7 @@ IMG {
 }
 
 A {
-	text-decoration: none;
-	color: navy;
-}
-
-A:hover {
-	text-decoration: underline;
+	color: black;
 }
 
 .error {
@@ -33,21 +100,35 @@ A:hover {
 	color: red;
 }
 
+.button {
+	font-weight: bold;
+	color: #ffffff;
+	border: 1px solid black;
+	background-image: url(images/button_bg.gif);
+	padding-left: 14px;
+	padding-right: 14px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
 H1, H2, H3 {
 	color: navy;
 }
 
 TABLE.list {
-	background-color: #f9fbfd;
+	background-color: #f5f5f5;
 	border: 1px solid #C3BBB6;
 	border-collapse: collapse;
 }
 
 TABLE.list TH {
 	border: 1px solid #C3BBB6;
-	background: #ffffff url(images/header_bg.gif) 0 0 repeat-x;
-	color: navy;
+	background: #ffffff url(images/th_bg.gif) 0 0 repeat-x;
 	white-space: nowrap;
+}
+
+TABLE.list TH A {
+	color: white;
 }
 
 TABLE.list TD {
@@ -60,7 +141,7 @@ TABLE.list TD {
 }
 
 TABLE.list CAPTION {
-	color: navy;
+	color: black;
 	text-align: left;
 	font-weight: bold;
 }
@@ -81,18 +162,18 @@ TH.order2 A {
 }
 
 TABLE.detail {
-	background-color: #f9fbfd;
+	background-color: #f5f5f5;
 	border: 1px solid #C3BBB6;
 }
 
 TABLE.detail CAPTION {
-	color: navy;
+	color: black;
 	font-weight: bold;
 	text-align: left;
 }
 
 TABLE.detail TD.label {
-	color: navy;
+	color: black;
 	text-align: right;
 	padding-right: 10px;
 }
@@ -109,4 +190,15 @@ TABLE.detail TD {
 
 .shrink {
 	width: 1%;
+}
+
+DIV.section-header {
+	font-size: 12px;
+	color: white;
+	font-weight: bold;
+	border: 1px solid #C3BBB6;
+	background: #ffffff url(images/th_bg.gif) 0 0 repeat-x;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 2px;
 }

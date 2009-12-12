@@ -5,6 +5,7 @@
 <%@ taglib prefix="ic" uri="http://www.programmerplanet.org/intracollab" %>
 
 <tiles:insertDefinition name="default">
+<tiles:putAttribute name="tab" value="projects"/>
 <tiles:putAttribute name="content" type="string">
 
 <i>${repositoryChange.username} on <fmt:formatDate value="${repositoryChange.changeDate}" type="both" dateStyle="short"/></i>

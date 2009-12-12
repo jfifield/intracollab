@@ -7,8 +7,6 @@
 <tiles:putAttribute name="content" type="string">
 
 <div align="center">
-
-	<h1>Welcome to <spring:message code="application.title"/></h1>
 	
 	<form method="post">
 	

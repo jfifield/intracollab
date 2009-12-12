@@ -1,6 +1,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
 <tiles:insertDefinition name="default">
+<tiles:putAttribute name="tab" value="projects"/>
 <tiles:putAttribute name="content" type="string">
 
 <table class="detail" width="100%">

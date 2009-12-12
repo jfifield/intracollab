@@ -4,6 +4,7 @@
 <%@ taglib prefix="ic" uri="http://www.programmerplanet.org/intracollab" %>
 
 <tiles:insertDefinition name="default">
+<tiles:putAttribute name="tab" value="projects"/>
 <tiles:putAttribute name="content" type="string">
 
 <div align="center">
@@ -49,14 +50,14 @@
 </div>
 
 <div style="padding-top: 20px;">
-	<div style="padding-bottom: 3px;">
-		<span style="color: navy; font-size: larger; font-weight: bold;">Attachments</span>
-		<span style="float: right;"><a href="attachment/edit.do?ticket_id=${ticket.id}">Add Attachment</a></span>
-	</div>
+	<div class="section-header">Attachments</div>
+	<div style="border-bottom: 1px solid gray; text-align: right;"><a href="attachment/edit.do?ticket_id=${ticket.id}">Add Attachment</a></div>
 	<c:forEach var="attachment" items="${ticket.attachments}">
-		<div style="border-top: 1px solid gray;">
-			<a href="attachment/download.do?id=${attachment.id}">${attachment.fileName}</a> (${attachment.fileSize} bytes)
+		<div style="border-bottom: 1px solid gray;">
 			<i>${attachment.createdBy} on <fmt:formatDate value="${attachment.created}" type="both" dateStyle="short"/></i>
+			<p>
+				<a href="attachment/download.do?id=${attachment.id}">${attachment.fileName}</a> (${attachment.fileSize} bytes)
+			</p>
 			<p>
 				<ic:markup>${attachment.description}</ic:markup>
 			</p>
@@ -65,12 +66,10 @@
 </div>
 
 <div style="padding-top: 20px;">
-	<div style="padding-bottom: 3px;">
-		<span style="color: navy; font-size: larger; font-weight: bold;">Comments</span>
-		<span style="float: right;"><a href="comment/edit.do?ticket_id=${ticket.id}">Add Comment</a></span>
-	</div>
+	<div class="section-header">Comments</div>
+	<div style="border-bottom: 1px solid gray; text-align: right;"><a href="comment/edit.do?ticket_id=${ticket.id}">Add Comment</a></div>
 	<c:forEach var="comment" items="${ticket.comments}">
-		<div style="border-top: 1px solid gray;">
+		<div style="border-bottom: 1px solid gray;">
 			<i>${comment.createdBy} on <fmt:formatDate value="${comment.created}" type="both" dateStyle="short"/></i>
 			<p>
 				<ic:markup>${comment.content}</ic:markup>
@@ -80,11 +79,9 @@
 </div>
 
 <div style="padding-top: 20px;">
-	<div style="padding-bottom: 3px;">
-		<span style="color: navy; font-size: larger; font-weight: bold;">Changes</span>
-	</div>
+	<div class="section-header">Changes</div>
 	<c:forEach var="change" items="${ticket.ticketChanges}">
-		<div style="border-top: 1px solid gray;">
+		<div style="border-bottom: 1px solid gray;">
 			<i>${change.username} on <fmt:formatDate value="${change.changeDate}" type="both" dateStyle="short"/></i>
 			<ul>
 				<c:forEach var="field" items="${change.fields}">
@@ -96,11 +93,9 @@
 </div>
 
 <div style="padding-top: 20px;">
-	<div style="padding-bottom: 3px;">
-		<span style="color: navy; font-size: larger; font-weight: bold;">Repository Changes</span>
-	</div>
+	<div class="section-header">Repository Changes</div>
 	<c:forEach var="change" items="${ticket.repositoryChanges}">
-		<div style="border-top: 1px solid gray;">
+		<div style="border-bottom: 1px solid gray;">
 			<i>${change.username} on <fmt:formatDate value="${change.changeDate}" type="both" dateStyle="short"/></i>
 			<p>
 				<ic:markup>[${change.id}] ${change.comment}</ic:markup>

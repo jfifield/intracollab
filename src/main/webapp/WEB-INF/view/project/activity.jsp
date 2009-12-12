@@ -4,12 +4,13 @@
 <%@ taglib prefix="ic" uri="http://www.programmerplanet.org/intracollab" %>
 
 <tiles:insertDefinition name="default">
+<tiles:putAttribute name="tab" value="projects"/>
 <tiles:putAttribute name="content" type="string">
 
 <h4>${project.name}: Activity</h4>
 
 <c:forEach var="day" items="${days}">
-	<div style="font-weight: bold; background-color: #f9fbfd; border: 1px solid #c3bbb6;">
+	<div class="section-header">
 		<fmt:formatDate value="${day}" pattern="MM/dd/yyyy"/>
 	</div>
 	<ul>
