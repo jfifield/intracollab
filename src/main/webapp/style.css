@@ -58,6 +58,8 @@ BODY, INPUT, TEXTAREA {
 	padding-right: 14px;
 	text-decoration: none;
 	display: block;
+	margin-left: 1px;
+	margin-right: 1px;
 }
 
 #menubar ul li a:hover, #menubar ul li.active a {

@@ -1,13 +1,10 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
 <tiles:insertDefinition name="default">
-<tiles:putAttribute name="tab" value="projects"/>
+<tiles:putAttribute name="tab" value="admin"/>
 <tiles:putAttribute name="content" type="string">
 
 <table class="detail" width="100%">
-	<tr>
-		<td colspan="4" style="text-align: right;"><a href="admin/project/edit.do?id=${project.id}">Edit</a></td>
-	</tr>
 	<tr>
 		<td class="label">Name:</td>
 		<td colspan="3">${project.name}</td>

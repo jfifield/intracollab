@@ -3,7 +3,7 @@
 <%@ taglib prefix="display" uri="http://displaytag.sf.net" %>
 
 <tiles:insertDefinition name="default">
-<tiles:putAttribute name="tab" value="projects"/>
+<tiles:putAttribute name="tab" value="admin"/>
 <tiles:putAttribute name="content" type="string">
 
 <div align="center">

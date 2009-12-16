@@ -7,6 +7,8 @@
 		"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
 	default-autowire="byName">
 
+	<bean id="adminIndexController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
+
 	<bean id="adminUserListController" class="org.programmerplanet.intracollab.web.admin.user.UserListController"/>
 
 	<bean id="adminUserFormValidator" class="org.programmerplanet.intracollab.web.admin.user.UserFormValidator"/>
@@ -20,6 +22,8 @@
 		<property name="successView" value="redirect:/admin/user/list.do"/>
 	</bean>
 
+	<bean id="adminProjectListController" class="org.programmerplanet.intracollab.web.admin.project.ProjectListController"/>
+
 	<bean id="adminProjectConfigurationController" class="org.programmerplanet.intracollab.web.admin.project.ProjectConfigurationController"/>
 
 	<bean id="adminProjectValidator" class="org.programmerplanet.intracollab.web.admin.project.ProjectValidator"/>
@@ -30,7 +34,7 @@
 		<property name="commandClass" value="org.programmerplanet.intracollab.model.Project"/>
 		<property name="validator" ref="adminProjectValidator"/>
 		<property name="formView" value="admin/project/edit"/>
-		<property name="successView" value="redirect:/project/list.do"/>
+		<property name="successView" value="redirect:/admin/project/list.do"/>
 	</bean>
 
 	<bean id="adminComponentListController" class="org.programmerplanet.intracollab.web.admin.component.ComponentListController"/>
@@ -70,10 +74,12 @@
 		</property>
 		<property name="mappings">
 			<props>
+				<prop key="/admin/index.do">adminIndexController</prop>
 				<prop key="/admin/user/list.do">adminUserListController</prop>
 				<prop key="/admin/user/edit.do">adminUserEditController</prop>
-				<prop key="/admin/project/configuration.do">adminProjectConfigurationController</prop>
+				<prop key="/admin/project/list.do">adminProjectListController</prop>
 				<prop key="/admin/project/edit.do">adminProjectEditController</prop>
+				<prop key="/admin/project/configuration.do">adminProjectConfigurationController</prop>
 				<prop key="/admin/component/list.do">adminComponentListController</prop>
 				<prop key="/admin/component/edit.do">adminComponentEditController</prop>
 				<prop key="/admin/milestone/list.do">adminMilestoneListController</prop>

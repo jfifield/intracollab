@@ -16,9 +16,9 @@
 <div class="right">
 	<ul>
 		<t:administrator>
-			<c:set var="active"><c:if test="${tab == 'users'}">active</c:if></c:set>
+			<c:set var="active"><c:if test="${tab == 'admin'}">active</c:if></c:set>
 			<li class="${active}">
-				<a href="admin/user/list.do">Users</a>
+				<a href="admin/index.do">Administration</a>
 			</li>
 		</t:administrator>
 		<li>

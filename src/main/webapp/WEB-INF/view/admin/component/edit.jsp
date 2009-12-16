@@ -4,7 +4,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <tiles:insertDefinition name="default">
-<tiles:putAttribute name="tab" value="projects"/>
+<tiles:putAttribute name="tab" value="admin"/>
 <tiles:putAttribute name="content" type="string">
 
 <div align="center">
