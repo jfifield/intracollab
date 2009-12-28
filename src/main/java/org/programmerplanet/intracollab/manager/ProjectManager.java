@@ -38,6 +38,10 @@ public interface ProjectManager {
 
 	Collection<Ticket> getTickets(Project project);
 
+	Collection<Ticket> getOpenTickets(Project project);
+
+	Collection<Ticket> getClosedTickets(Project project);
+
 	Collection<Ticket> getTickets(Milestone milestone);
 
 	Ticket getTicket(Long id);

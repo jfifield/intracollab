@@ -6,6 +6,20 @@
 <tiles:putAttribute name="tab" value="projects"/>
 <tiles:putAttribute name="content" type="string">
 
+<div align="right">
+	<form name="show_form">
+		<input type="hidden" name="project_id" value="${project.id}"/>
+		Show:
+		<select name="show" onchange="document.forms['show_form'].submit();">
+			<c:forEach var="showOption" items="${showOptions}">
+				<c:set var="selected" value=""/>
+				<c:if test="${show == showOption.first}"><c:set var="selected">selected="selected"</c:set></c:if>
+				<option value="${showOption.first}"${selected}>${showOption.second}</option>
+			</c:forEach>
+		</select>
+	</form>
+</div>
+
 <div align="center">
 
 	<display:table id="ticket" name="tickets" class="list" style="width:90%;" defaultsort="1" defaultorder="ascending" pagesize="25" sort="list">

@@ -89,6 +89,30 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 	}
 
 	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getClosedTickets(org.programmerplanet.intracollab.model.Project)
+	 */
+	public Collection<Ticket> getClosedTickets(Project project) {
+		String query = "SELECT t FROM Ticket AS t WHERE t.project = :project AND t.status = :status";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("project", project);
+		params.put("status", Ticket.Status.COMPLETED);
+		List list = this.getJpaTemplate().findByNamedParams(query, params);
+		return list;
+	}
+
+	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getOpenTickets(org.programmerplanet.intracollab.model.Project)
+	 */
+	public Collection<Ticket> getOpenTickets(Project project) {
+		String query = "SELECT t FROM Ticket AS t WHERE t.project = :project AND t.status <> :status";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("project", project);
+		params.put("status", Ticket.Status.COMPLETED);
+		List list = this.getJpaTemplate().findByNamedParams(query, params);
+		return list;
+	}
+
+	/**
 	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getTickets(org.programmerplanet.intracollab.model.Milestone)
 	 */
 	public Collection<Ticket> getTickets(Milestone milestone) {
