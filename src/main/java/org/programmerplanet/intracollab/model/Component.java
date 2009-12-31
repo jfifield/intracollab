@@ -7,19 +7,10 @@ package org.programmerplanet.intracollab.model;
  * 
  * Copyright (c) 2009 Joseph Fifield
  */
-public class Component {
+public class Component extends BaseEntity {
 
-	private Long id;
 	private Project project;
 	private String name;
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
 
 	public void setProject(Project project) {
 		this.project = project;

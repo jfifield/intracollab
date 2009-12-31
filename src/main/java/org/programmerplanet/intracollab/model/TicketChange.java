@@ -18,21 +18,12 @@ import org.springframework.beans.NullValueInNestedPathException;
  * 
  * Copyright (c) 2009 Joseph Fifield
  */
-public class TicketChange {
+public class TicketChange extends BaseEntity {
 
-	private Long id;
 	private Ticket ticket;
 	private String username;
 	private Date changeDate;
 	private Set<TicketChangeField> fields;
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
 
 	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;

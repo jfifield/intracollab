@@ -9,21 +9,12 @@ import java.util.Date;
  * 
  * Copyright (c) 2009 Joseph Fifield
  */
-public class Milestone {
+public class Milestone extends BaseEntity {
 
-	private Long id;
 	private Project project;
 	private String name;
 	private Date dueDate;
 	private boolean completed;
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
 
 	public void setProject(Project project) {
 		this.project = project;

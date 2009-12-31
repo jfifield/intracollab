@@ -7,21 +7,12 @@ package org.programmerplanet.intracollab.model;
  * 
  * Copyright (c) 2009 Joseph Fifield
  */
-public class TicketChangeField {
+public class TicketChangeField extends BaseEntity {
 
-	private Long id;
 	private TicketChange ticketChange;
 	private String field;
 	private String oldValue;
 	private String newValue;
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
 
 	public void setTicketChange(TicketChange ticketChange) {
 		this.ticketChange = ticketChange;

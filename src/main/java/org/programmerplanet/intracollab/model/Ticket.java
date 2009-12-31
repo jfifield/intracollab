@@ -10,9 +10,8 @@ import java.util.Date;
  * 
  * Copyright (c) 2009 Joseph Fifield
  */
-public class Ticket {
+public class Ticket extends BaseEntity {
 
-	private Long id;
 	private Project project;
 	private String name;
 	private String description;
@@ -27,14 +26,6 @@ public class Ticket {
 	private Set<AttachmentInfo> attachments;
 	private Set<TicketChange> ticketChanges;
 	private Set<RepositoryChange> repositoryChanges;
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
 
 	public void setProject(Project project) {
 		this.project = project;

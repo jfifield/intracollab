@@ -10,10 +10,6 @@
   <entity class="User">
   	<table name="ic_user"/>
   	<attributes>
-  		<id name="id">
-  			<column name="id"/>
-  			<generated-value strategy="AUTO"/>
-  		</id>
   		<basic name="username">
   			<column name="username"/>
   		</basic>

@@ -7,20 +7,11 @@ package org.programmerplanet.intracollab.model;
  * 
  * Copyright (c) 2009 Joseph Fifield
  */
-public class RepositoryChangeFile {
+public class RepositoryChangeFile extends BaseEntity {
 
-	private Long id;
 	private RepositoryChange repositoryChange;
 	private String filename;
 	private String revision;
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
 
 	public void setRepositoryChange(RepositoryChange repositoryChange) {
 		this.repositoryChange = repositoryChange;

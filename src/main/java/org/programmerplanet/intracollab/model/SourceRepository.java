@@ -10,21 +10,12 @@ import java.util.List;
  * 
  * Copyright (c) 2009 Joseph Fifield
  */
-public abstract class SourceRepository {
+public abstract class SourceRepository extends BaseEntity {
 
-	private Long id;
 	private Project project;
 	private String path;
 	private String modules;
 	private Date lastChangeDate;
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
 
 	public void setProject(Project project) {
 		this.project = project;

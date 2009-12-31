@@ -13,9 +13,8 @@ import java.util.Date;
  * 
  * Copyright (c) 2009 Joseph Fifield
  */
-public class AttachmentInfo {
+public class AttachmentInfo extends BaseEntity {
 
-	private Long id;
 	private Ticket ticket;
 	private String fileName;
 	private String description;
@@ -23,14 +22,6 @@ public class AttachmentInfo {
 	private String contentType;
 	private Date created;
 	private String createdBy;
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
 
 	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;

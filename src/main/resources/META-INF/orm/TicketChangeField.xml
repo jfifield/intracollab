@@ -10,10 +10,6 @@
   <entity class="TicketChangeField">
   	<table name="ic_ticket_change_field"/>
   	<attributes>
-  		<id name="id">
-  			<column name="id"/>
-  			<generated-value strategy="AUTO"/>
-  		</id>
   		<basic name="field">
   			<column name="field"/>
   		</basic>

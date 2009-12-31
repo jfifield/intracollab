@@ -11,21 +11,12 @@ import java.security.NoSuchAlgorithmException;
  * 
  * Copyright (c) 2009 Joseph Fifield
  */
-public class User {
+public class User extends BaseEntity {
 
-	private Long id;
 	private String username;
 	private String password;
 	private String emailAddress;
 	private boolean administrator;
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
 
 	public void setUsername(String username) {
 		this.username = username;

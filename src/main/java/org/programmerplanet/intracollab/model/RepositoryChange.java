@@ -14,28 +14,19 @@ import java.util.regex.Pattern;
  * 
  * Copyright (c) 2009 Joseph Fifield
  */
-public class RepositoryChange {
+public class RepositoryChange extends BaseEntity {
 
 	/**
 	 * Regular expression pattern for matching ticket number references in the comments. 
 	 */
 	private static final Pattern TICKET_NUMBER_PATTERN = Pattern.compile("#(\\d+)");
 
-	private Long id;
 	private Project project;
 	private String username;
 	private Date changeDate;
 	private String comment;
 	private Set<RepositoryChangeFile> files;
 	private Set<Ticket> tickets;
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
 
 	public void setProject(Project project) {
 		this.project = project;

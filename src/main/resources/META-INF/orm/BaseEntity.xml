@@ -7,19 +7,13 @@
   
   <package>org.programmerplanet.intracollab.model</package>
   
-  <entity class="RepositoryChangeFile">
-  	<table name="ic_repository_change_file"/>
+  <mapped-superclass class="BaseEntity">
   	<attributes>
-  		<basic name="filename">
-  			<column name="filename"/>
-  		</basic>
-  		<basic name="revision">
-  			<column name="revision"/>
-  		</basic>
-  		<many-to-one name="repositoryChange">
-  			<join-column name="repository_change_id"/>
-  		</many-to-one>
+  		<id name="id">
+  			<column name="id"/>
+  			<generated-value strategy="AUTO"/>
+  		</id>
   	</attributes>
-  </entity>
+  </mapped-superclass>
   
 </entity-mappings>

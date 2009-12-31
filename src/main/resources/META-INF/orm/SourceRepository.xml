@@ -12,10 +12,6 @@
   	<inheritance strategy="SINGLE_TABLE"/>
   	<discriminator-column name="repository_type"/>
   	<attributes>
-  		<id name="id">
-  			<column name="id"/>
-  			<generated-value strategy="AUTO"/>
-  		</id>
   		<basic name="path">
   			<column name="path"/>
   		</basic>

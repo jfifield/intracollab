@@ -10,10 +10,6 @@
   <entity class="AttachmentInfo">
   	<table name="ic_attachment"/>
   	<attributes>
-  		<id name="id">
-  			<column name="id"/>
-  			<generated-value strategy="AUTO"/>
-  		</id>
   		<basic name="fileName">
   			<column name="file_name"/>
   		</basic>
@@ -41,10 +37,6 @@
   <entity class="Attachment">
   	<table name="ic_attachment"/>
   	<attributes>
-  		<id name="id">
-  			<column name="id"/>
-  			<generated-value strategy="AUTO"/>
-  		</id>
   		<basic name="fileName">
   			<column name="file_name"/>
   		</basic>

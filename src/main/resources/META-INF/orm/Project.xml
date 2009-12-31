@@ -10,10 +10,6 @@
   <entity class="Project">
   	<table name="ic_project"/>
   	<attributes>
-  		<id name="id">
-  			<column name="id"/>
-  			<generated-value strategy="AUTO"/>
-  		</id>
   		<basic name="name">
   			<column name="name"/>
   		</basic>

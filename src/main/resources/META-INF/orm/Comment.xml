@@ -10,10 +10,6 @@
   <entity class="Comment">
   	<table name="ic_comment"/>
   	<attributes>
-  		<id name="id">
-  			<column name="id"/>
-  			<generated-value strategy="AUTO"/>
-  		</id>
   		<basic name="content">
   			<column name="content"/>
   		</basic>

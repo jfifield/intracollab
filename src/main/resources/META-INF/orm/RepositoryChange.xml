@@ -10,10 +10,6 @@
   <entity class="RepositoryChange">
   	<table name="ic_repository_change"/>
   	<attributes>
-  		<id name="id">
-  			<column name="id"/>
-  			<generated-value strategy="AUTO"/>
-  		</id>
   		<basic name="username">
   			<column name="username"/>
   		</basic>
