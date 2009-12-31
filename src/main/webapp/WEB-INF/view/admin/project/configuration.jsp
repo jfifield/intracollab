@@ -16,6 +16,7 @@
 </table>
 
 <ul>
+	<li><a href="admin/source_repository/edit.do?project_id=${project.id}">Source Repository</a></li>
 	<li><a href="admin/component/list.do?project_id=${project.id}">Components</a></li>
 	<li><a href="admin/milestone/list.do?project_id=${project.id}">Milestones</a></li>
 </ul>

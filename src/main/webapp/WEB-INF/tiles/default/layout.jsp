@@ -8,6 +8,7 @@
 	<title><spring:message code="application.title"/></title>
 	<t:base/>
 	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<script type="text/javascript" src="script/prototype/1.6.1/prototype.js"></script>
 </head>
 <body>
 	<table id="layout">

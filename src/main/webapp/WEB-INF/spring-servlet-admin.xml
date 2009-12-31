@@ -37,6 +37,17 @@
 		<property name="successView" value="redirect:/admin/project/list.do"/>
 	</bean>
 
+	<bean id="adminSourceRepositoryFormValidator" class="org.programmerplanet.intracollab.web.admin.sourcerepository.SourceRepositoryFormValidator"/>
+
+	<bean id="adminSourceRepositoryEditController" class="org.programmerplanet.intracollab.web.admin.sourcerepository.SourceRepositoryEditController">
+		<property name="sessionForm" value="false"/>
+		<property name="commandName" value="sourceRepository"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.web.admin.sourcerepository.SourceRepositoryForm"/>
+		<property name="validator" ref="adminSourceRepositoryFormValidator"/>
+		<property name="formView" value="admin/source_repository/edit"/>
+		<property name="successView" value="redirect:/admin/project/configuration.do"/>
+	</bean>
+
 	<bean id="adminComponentListController" class="org.programmerplanet.intracollab.web.admin.component.ComponentListController"/>
 
 	<bean id="adminComponentValidator" class="org.programmerplanet.intracollab.web.admin.component.ComponentValidator"/>
@@ -80,6 +91,7 @@
 				<prop key="/admin/project/list.do">adminProjectListController</prop>
 				<prop key="/admin/project/edit.do">adminProjectEditController</prop>
 				<prop key="/admin/project/configuration.do">adminProjectConfigurationController</prop>
+				<prop key="/admin/source_repository/edit.do">adminSourceRepositoryEditController</prop>
 				<prop key="/admin/component/list.do">adminComponentListController</prop>
 				<prop key="/admin/component/edit.do">adminComponentEditController</prop>
 				<prop key="/admin/milestone/list.do">adminMilestoneListController</prop>

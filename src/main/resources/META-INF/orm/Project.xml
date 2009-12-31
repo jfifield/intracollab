@@ -20,6 +20,7 @@
   		<one-to-many name="milestones" mapped-by="project" target-entity="Milestone"/>
   		<one-to-one name="sourceRepository" target-entity="SourceRepository" fetch="LAZY">
   			<join-column name="source_repository_id"/>
+  			<cascade><cascade-merge/></cascade>
   		</one-to-one>
   	</attributes>
   </entity>

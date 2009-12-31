@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.programmerplanet.intracollab.model.Attachment;
 import org.programmerplanet.intracollab.model.AttachmentInfo;
 import org.programmerplanet.intracollab.model.Comment;
@@ -53,7 +54,20 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 	 * @see org.programmerplanet.intracollab.manager.ProjectManager#saveProject(org.programmerplanet.intracollab.model.Project)
 	 */
 	public void saveProject(Project project) {
+		// there may be an orphan source repository that needs to be deleted manually
+		// this is a workaround since orphans are not removed in JPA 1.0 one-to-one relationships 
+		// this may not be necessary with JPA 2.0's orphanRemoval property on one-to-one relationships 
+		SourceRepository orphanSourceRepository = null;
+		if (project.getId() != null) {
+			Project oldProject = this.getProject(project.getId(), "sourceRepository");
+			if (!ObjectUtils.equals(oldProject.getSourceRepository(), project.getSourceRepository())) {
+				orphanSourceRepository = oldProject.getSourceRepository();
+			}
+		}
 		this.getJpaTemplate().merge(project);
+		if (orphanSourceRepository != null) {
+			this.getJpaTemplate().remove(orphanSourceRepository);
+		}
 	}
 
 	/**
