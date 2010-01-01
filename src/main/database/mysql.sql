@@ -1,4 +1,14 @@
 --
+-- Table `ic_system_option`
+--
+DROP TABLE IF EXISTS `ic_system_option`;
+CREATE TABLE `ic_system_option` (
+  `option_key` varchar(64) NOT NULL,
+  `option_value` text NOT NULL,
+  CONSTRAINT `pk_system_option` PRIMARY KEY (`option_key`)
+) ENGINE=InnoDB;
+
+--
 -- Table `ic_user`
 --
 DROP TABLE IF EXISTS `ic_user`;
