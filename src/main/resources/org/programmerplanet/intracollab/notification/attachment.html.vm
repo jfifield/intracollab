@@ -1,0 +1,49 @@
+<html>
+<head>
+	<style>
+		BODY, TABLE { background-color: white; font-size: 12px; font-family: Verdana, Helvetica, Arial, sans-serif; }
+		TABLE.detail { background-color: #f5f5f5; border: 1px solid #C3BBB6; }
+		TABLE.detail TD { text-align: left; white-space: nowrap; vertical-align: top; }
+		TABLE.detail TD.label { color: black; text-align: right; padding-right: 10px; font-weight: bold; }
+	</style>
+</head>
+<body>
+	<h3>$!{ticket.project.name} ticket #$!{ticket.id} attachment by $!{attachment.createdBy}</h3>
+	<table class="detail" width="100%">
+		<tr>
+			<td class="label">Name:</td>
+			<td colspan="3">$!{ticket.name}</td>
+		</tr>
+		<tr>
+			<td class="label">Ticket #:</td>
+			<td>$!{ticket.id}</td>
+			<td class="label">Assigned To:</td>
+			<td>$!{ticket.assignedTo.username}</td>
+		</tr>
+		<tr>
+			<td class="label">Status:</td>
+			<td>$!{ticket.status.title}</td>
+			<td class="label">Priority:</td>
+			<td>$!{ticket.priority.title}</td>
+		</tr>
+		<tr>
+			<td class="label">Milestone:</td>
+			<td>$!{ticket.milestone.name}</td>
+			<td class="label">Component:</td>
+			<td>$!{ticket.component.name}</td>
+		</tr>
+		<tr>
+			<td class="label">Created:</td>
+			<td>$!{date.format('short', ${ticket.created})}</td>
+			<td class="label">Created By:</td>
+			<td>$!{ticket.createdBy}</td>
+		</tr>
+		<tr>
+			<td class="label">Description:</td>
+			<td colspan="3">$!{ticket.description}</td>
+		</tr>
+	</table>
+	<p>$!{attachment.fileName} ($!{attachment.fileSize} bytes)</p>
+	<p>$!{attachment.description}</p>
+</body>
+</html>

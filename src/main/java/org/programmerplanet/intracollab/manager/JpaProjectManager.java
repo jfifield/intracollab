@@ -17,6 +17,7 @@ import org.programmerplanet.intracollab.model.SourceRepository;
 import org.programmerplanet.intracollab.model.Ticket;
 import org.programmerplanet.intracollab.model.TicketChange;
 import org.programmerplanet.intracollab.model.User;
+import org.programmerplanet.intracollab.notification.NotificationManager;
 import org.programmerplanet.intracollab.util.DateRange;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 
@@ -28,6 +29,12 @@ import org.springframework.orm.jpa.support.JpaDaoSupport;
  * Copyright (c) 2009 Joseph Fifield
  */
 public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
+
+	private NotificationManager notificationManager;
+
+	public void setNotificationManager(NotificationManager notificationManager) {
+		this.notificationManager = notificationManager;
+	}
 
 	/**
 	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getProjects()
@@ -156,13 +163,17 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 	 */
 	public void saveTicket(Ticket ticket, User user) {
 		TicketChange change = null;
-		if (ticket.getId() != null) {
+		boolean newTicket = (ticket.getId() == null);
+		if (!newTicket) {
 			Ticket oldTicket = getTicket(ticket.getId());
 			change = TicketChange.calculateTicketChange(oldTicket, ticket, user);
 		}
-		this.getJpaTemplate().merge(ticket);
-		if (change != null) {
+		ticket = this.getJpaTemplate().merge(ticket);
+		if (newTicket) {
+			notificationManager.sendTicketCreateNotification(ticket);
+		} else if (change != null) {
 			this.getJpaTemplate().merge(change);
+			notificationManager.sendTicketChangeNotification(change);
 		}
 	}
 
@@ -179,6 +190,7 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 	 */
 	public void saveComment(Comment comment) {
 		this.getJpaTemplate().merge(comment);
+		notificationManager.sendCommentNotification(comment);
 	}
 
 	/**
@@ -193,6 +205,7 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 	 */
 	public void saveAttachment(Attachment attachment) {
 		this.getJpaTemplate().merge(attachment);
+		notificationManager.sendAttachmentNotification(attachment);
 	}
 
 	private <T> T getWithFetches(Class<T> entityClass, Long id, String... fetches) {

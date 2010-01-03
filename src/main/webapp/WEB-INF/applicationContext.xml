@@ -44,7 +44,17 @@
 		</tx:attributes>
 	</tx:advice>
 
+	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="velocityProperties">
+			<value>
+				resource.loader=class
+				class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+			</value>
+		</property>
+	</bean>
+
 	<bean id="configurationManager" class="org.programmerplanet.intracollab.configuration.JdbcConfigurationManager"/>
+	<bean id="notificationManager" class="org.programmerplanet.intracollab.notification.DefaultNotificationManager"/>
 	<bean id="userManager" class="org.programmerplanet.intracollab.manager.JpaUserManager"/>
 	<bean id="projectManager" class="org.programmerplanet.intracollab.manager.JpaProjectManager"/>
 	
