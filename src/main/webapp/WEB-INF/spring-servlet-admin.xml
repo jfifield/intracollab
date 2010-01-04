@@ -73,7 +73,18 @@
 		<property name="formView" value="admin/milestone/edit"/>
 		<property name="successView" value="redirect:/admin/milestone/list.do"/>
 	</bean>
-	
+
+	<bean id="adminConfigurationFormValidator" class="org.programmerplanet.intracollab.web.admin.configuration.ConfigurationFormValidator"/>
+
+	<bean id="adminConfigurationEditController" class="org.programmerplanet.intracollab.web.admin.configuration.ConfigurationEditController">
+		<property name="sessionForm" value="false"/>
+		<property name="commandName" value="configuration"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.web.admin.configuration.ConfigurationForm"/>
+		<property name="validator" ref="adminConfigurationFormValidator"/>
+		<property name="formView" value="admin/configuration/edit"/>
+		<property name="successView" value="redirect:/admin/index.do"/>
+	</bean>
+
 	<bean id="administrationInterceptor" class="org.programmerplanet.intracollab.web.admin.AdministrationInterceptor"/>
 
 	<bean id="adminMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -96,6 +107,7 @@
 				<prop key="/admin/component/edit.do">adminComponentEditController</prop>
 				<prop key="/admin/milestone/list.do">adminMilestoneListController</prop>
 				<prop key="/admin/milestone/edit.do">adminMilestoneEditController</prop>
+				<prop key="/admin/configuration/edit.do">adminConfigurationEditController</prop>
 			</props>
 		</property>
 	</bean>

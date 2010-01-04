@@ -29,11 +29,11 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
  */
 public class DefaultNotificationManager implements NotificationManager, Configurable {
 
-	private static final String CONFIG_EMAIL_NOTIFICATIONS = "email.notifications";
-	private static final String CONFIG_EMAIL_SENDER = "email.sender";
-	private static final String CONFIG_SMTP_HOST = "smtp.host";
-	private static final String CONFIG_SMTP_USERNAME = "smtp.username";
-	private static final String CONFIG_SMTP_PASSWORD = "smtp.password";
+	public static final String CONFIG_EMAIL_NOTIFICATIONS = "email.notifications";
+	public static final String CONFIG_EMAIL_SENDER = "email.sender";
+	public static final String CONFIG_SMTP_HOST = "smtp.host";
+	public static final String CONFIG_SMTP_USERNAME = "smtp.username";
+	public static final String CONFIG_SMTP_PASSWORD = "smtp.password";
 
 	private VelocityEngine velocityEngine;
 	private JavaMailSender mailSender = new NullJavaMailSender();
