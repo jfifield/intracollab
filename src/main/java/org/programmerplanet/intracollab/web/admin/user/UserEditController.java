@@ -3,6 +3,7 @@ package org.programmerplanet.intracollab.web.admin.user;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.programmerplanet.intracollab.manager.UserManager;
 import org.programmerplanet.intracollab.model.User;
 import org.programmerplanet.intracollab.web.ServletRequestUtils;
@@ -37,8 +38,10 @@ public class UserEditController extends SimpleMultiActionFormController {
 		}
 		BeanUtils.copyProperties(userForm, user);
 		String password = userForm.getPassword1();
-		password = User.getPasswordHash(password);
-		user.setPassword(password);
+		if (StringUtils.isNotEmpty(password)) {
+			password = User.getPasswordHash(password);
+			user.setPassword(password);
+		}
 		userManager.saveUser(user);
 		return new ModelAndView(this.getSuccessView());
 	}
