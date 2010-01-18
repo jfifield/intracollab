@@ -15,6 +15,10 @@
 
 <div class="right">
 	<ul>
+		<c:set var="active"><c:if test="${tab == 'search'}">active</c:if></c:set>
+		<li class="${active}">
+			<a href="search.do">Search</a>
+		</li>
 		<t:administrator>
 			<c:set var="active"><c:if test="${tab == 'admin'}">active</c:if></c:set>
 			<li class="${active}">

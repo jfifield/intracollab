@@ -1,7 +1,9 @@
 package org.programmerplanet.intracollab.manager;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,8 +19,14 @@ import org.programmerplanet.intracollab.model.SourceRepository;
 import org.programmerplanet.intracollab.model.Ticket;
 import org.programmerplanet.intracollab.model.TicketChange;
 import org.programmerplanet.intracollab.model.User;
+import org.programmerplanet.intracollab.model.search.AttachmentSearchResult;
+import org.programmerplanet.intracollab.model.search.CommentSearchResult;
+import org.programmerplanet.intracollab.model.search.RepositoryChangeSearchResult;
+import org.programmerplanet.intracollab.model.search.SearchResult;
+import org.programmerplanet.intracollab.model.search.TicketSearchResult;
 import org.programmerplanet.intracollab.notification.NotificationManager;
 import org.programmerplanet.intracollab.util.DateRange;
+import org.springframework.beans.support.PropertyComparator;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 
 /**
@@ -354,6 +362,64 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 	 */
 	public RepositoryChange getRepositoryChange(Long id, String... fetches) {
 		return getWithFetches(RepositoryChange.class, id, fetches);
+	}
+
+	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#search(java.lang.String)
+	 */
+	public List<SearchResult> search(String search) {
+		List<SearchResult> searchResults = new LinkedList<SearchResult>();
+
+		Collection<Ticket> tickets = searchTickets(search);
+		for (Ticket ticket : tickets) {
+			searchResults.add(new TicketSearchResult(ticket));
+		}
+
+		Collection<AttachmentInfo> attachments = searchAttachments(search);
+		for (AttachmentInfo attachment : attachments) {
+			searchResults.add(new AttachmentSearchResult(attachment));
+		}
+
+		Collection<Comment> comments = searchComments(search);
+		for (Comment comment : comments) {
+			searchResults.add(new CommentSearchResult(comment));
+		}
+
+		Collection<RepositoryChange> repositoryChanges = searchRepositoryChanges(search);
+		for (RepositoryChange repositoryChange : repositoryChanges) {
+			searchResults.add(new RepositoryChangeSearchResult(repositoryChange));
+		}
+
+		Collections.sort(searchResults, new PropertyComparator("date", false, false));
+		return searchResults;
+	}
+
+	private Collection<Ticket> searchTickets(String search) {
+		String query = "SELECT t FROM Ticket AS t WHERE t.name LIKE :search OR t.description LIKE :search";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("search", "%" + search + "%");
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	private Collection<AttachmentInfo> searchAttachments(String search) {
+		String query = "SELECT a FROM AttachmentInfo AS a WHERE a.description LIKE :search";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("search", "%" + search + "%");
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	private Collection<Comment> searchComments(String search) {
+		String query = "SELECT c FROM Comment AS c WHERE c.content LIKE :search";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("search", "%" + search + "%");
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	private Collection<RepositoryChange> searchRepositoryChanges(String search) {
+		String query = "SELECT rc FROM RepositoryChange AS rc WHERE rc.comment LIKE :search";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("search", "%" + search + "%");
+		return this.getJpaTemplate().findByNamedParams(query, params);
 	}
 
 }

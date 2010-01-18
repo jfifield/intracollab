@@ -80,6 +80,14 @@
 	<bean id="repositoryChangeViewController" class="org.programmerplanet.intracollab.web.repositorychange.RepositoryChangeViewController"/>
 
 	<bean id="milestoneViewController" class="org.programmerplanet.intracollab.web.milestone.MilestoneViewController"/>
+
+	<bean id="searchController" class="org.programmerplanet.intracollab.web.SearchController">
+		<property name="sessionForm" value="false"/>
+		<property name="commandName" value="search"/>
+		<property name="commandClass" value="org.programmerplanet.intracollab.web.SearchForm"/>
+		<property name="formView" value="search"/>
+		<property name="successView" value="search"/>
+	</bean>
 	
 	<bean id="unsecureMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
@@ -112,6 +120,7 @@
 				<prop key="/attachment/download.do">attachmentDownloadController</prop>
 				<prop key="/repository_change/view.do">repositoryChangeViewController</prop>
 				<prop key="/milestone/view.do">milestoneViewController</prop>
+				<prop key="/search.do">searchController</prop>
 			</props>
 		</property>
 	</bean>

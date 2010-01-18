@@ -204,3 +204,7 @@ DIV.section-header {
 	padding-bottom: 1px;
 	padding-left: 2px;
 }
+
+SPAN.highlight {
+	background-color: yellow;
+}

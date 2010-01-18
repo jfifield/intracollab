@@ -1,6 +1,7 @@
 package org.programmerplanet.intracollab.manager;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.programmerplanet.intracollab.model.Attachment;
 import org.programmerplanet.intracollab.model.AttachmentInfo;
@@ -13,6 +14,7 @@ import org.programmerplanet.intracollab.model.SourceRepository;
 import org.programmerplanet.intracollab.model.Ticket;
 import org.programmerplanet.intracollab.model.TicketChange;
 import org.programmerplanet.intracollab.model.User;
+import org.programmerplanet.intracollab.model.search.SearchResult;
 import org.programmerplanet.intracollab.util.DateRange;
 
 /**
@@ -87,5 +89,7 @@ public interface ProjectManager {
 	RepositoryChange getRepositoryChange(Long id);
 
 	RepositoryChange getRepositoryChange(Long id, String... fetches);
+
+	List<SearchResult> search(String search);
 
 }
