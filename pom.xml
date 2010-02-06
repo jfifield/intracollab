@@ -5,7 +5,7 @@
   <artifactId>intracollab</artifactId>
   <packaging>war</packaging>
   <name>IntraCollab</name>
-  <version>0.2</version>
+  <version>0.3-dev</version>
   <url>http://intracollab.sourceforge.net</url>
   <repositories>
 		<repository>
