@@ -1,9 +1,8 @@
-package org.programmerplanet.intracollab.web.repositorychange;
+package org.programmerplanet.intracollab.model.activity;
 
 import java.util.Date;
 
 import org.programmerplanet.intracollab.model.RepositoryChange;
-import org.programmerplanet.intracollab.web.project.ActivityItem;
 
 /**
  * An <code>ActivityItem</code> for a <code>RepositoryChange</code>.
@@ -21,14 +20,14 @@ public class RepositoryChangeActivityItem implements ActivityItem {
 	}
 
 	/**
-	 * @see org.programmerplanet.intracollab.web.project.ActivityItem#getDate()
+	 * @see org.programmerplanet.intracollab.model.activity.ActivityItem#getDate()
 	 */
 	public Date getDate() {
 		return repositoryChange.getChangeDate();
 	}
 
 	/**
-	 * @see org.programmerplanet.intracollab.web.project.ActivityItem#getDescription()
+	 * @see org.programmerplanet.intracollab.model.activity.ActivityItem#getDescription()
 	 */
 	public String getDescription() {
 		return "Repository change [" + repositoryChange.getId() + "] committed by " + repositoryChange.getUsername();

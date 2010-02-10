@@ -1,9 +1,8 @@
-package org.programmerplanet.intracollab.web.ticketchange;
+package org.programmerplanet.intracollab.model.activity;
 
 import java.util.Date;
 
 import org.programmerplanet.intracollab.model.TicketChange;
-import org.programmerplanet.intracollab.web.project.ActivityItem;
 
 /**
  * An <code>ActivityItem</code> for a <code>TicketChange</code>.
@@ -21,14 +20,14 @@ public class TicketChangeActivityItem implements ActivityItem {
 	}
 
 	/**
-	 * @see org.programmerplanet.intracollab.web.project.ActivityItem#getDate()
+	 * @see org.programmerplanet.intracollab.model.activity.ActivityItem#getDate()
 	 */
 	public Date getDate() {
 		return ticketChange.getChangeDate();
 	}
 
 	/**
-	 * @see org.programmerplanet.intracollab.web.project.ActivityItem#getDescription()
+	 * @see org.programmerplanet.intracollab.model.activity.ActivityItem#getDescription()
 	 */
 	public String getDescription() {
 		return "Ticket #" + ticketChange.getTicket().getId() + " edited by " + ticketChange.getUsername();

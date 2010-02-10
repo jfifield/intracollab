@@ -1,4 +1,4 @@
-package org.programmerplanet.intracollab.web.project;
+package org.programmerplanet.intracollab.model.activity;
 
 import java.util.Date;
 

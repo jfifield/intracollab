@@ -19,6 +19,12 @@ import org.programmerplanet.intracollab.model.SourceRepository;
 import org.programmerplanet.intracollab.model.Ticket;
 import org.programmerplanet.intracollab.model.TicketChange;
 import org.programmerplanet.intracollab.model.User;
+import org.programmerplanet.intracollab.model.activity.ActivityItem;
+import org.programmerplanet.intracollab.model.activity.AttachmentActivityItem;
+import org.programmerplanet.intracollab.model.activity.CommentActivityItem;
+import org.programmerplanet.intracollab.model.activity.RepositoryChangeActivityItem;
+import org.programmerplanet.intracollab.model.activity.TicketActivityItem;
+import org.programmerplanet.intracollab.model.activity.TicketChangeActivityItem;
 import org.programmerplanet.intracollab.model.search.AttachmentSearchResult;
 import org.programmerplanet.intracollab.model.search.CommentSearchResult;
 import org.programmerplanet.intracollab.model.search.RepositoryChangeSearchResult;
@@ -291,9 +297,41 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 	}
 
 	/**
-	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getTicketsCreatedBetween(org.programmerplanet.intracollab.model.Project, org.programmerplanet.intracollab.util.DateRange)
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getProjectActivity(org.programmerplanet.intracollab.model.Project, org.programmerplanet.intracollab.util.DateRange)
 	 */
-	public Collection<Ticket> getTicketsCreatedBetween(Project project, DateRange dateRange) {
+	public List<ActivityItem> getProjectActivity(Project project, DateRange dateRange) {
+		List<ActivityItem> activity = new LinkedList<ActivityItem>();
+
+		Collection<Ticket> tickets = getTicketsCreatedBetween(project, dateRange);
+		for (Ticket ticket : tickets) {
+			activity.add(new TicketActivityItem(ticket));
+		}
+
+		Collection<TicketChange> ticketChanges = getTicketChangesCreatedBetween(project, dateRange);
+		for (TicketChange ticketChange : ticketChanges) {
+			activity.add(new TicketChangeActivityItem(ticketChange));
+		}
+
+		Collection<RepositoryChange> repositoryChanges = getRepositoryChangesCreatedBetween(project, dateRange);
+		for (RepositoryChange repositoryChange : repositoryChanges) {
+			activity.add(new RepositoryChangeActivityItem(repositoryChange));
+		}
+
+		Collection<Comment> comments = getCommentsCreatedBetween(project, dateRange);
+		for (Comment comment : comments) {
+			activity.add(new CommentActivityItem(comment));
+		}
+
+		Collection<AttachmentInfo> attachments = getAttachmentsCreatedBetween(project, dateRange);
+		for (AttachmentInfo attachment : attachments) {
+			activity.add(new AttachmentActivityItem(attachment));
+		}
+
+		Collections.sort(activity, new PropertyComparator("date", false, false));
+		return activity;
+	}
+
+	private Collection<Ticket> getTicketsCreatedBetween(Project project, DateRange dateRange) {
 		String query = "SELECT t FROM Ticket AS t WHERE t.project = :project AND t.created BETWEEN :startDate AND :endDate";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("project", project);
@@ -302,10 +340,7 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 		return this.getJpaTemplate().findByNamedParams(query, params);
 	}
 
-	/**
-	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getTicketChangesCreatedBetween(org.programmerplanet.intracollab.model.Project, org.programmerplanet.intracollab.util.DateRange)
-	 */
-	public Collection<TicketChange> getTicketChangesCreatedBetween(Project project, DateRange dateRange) {
+	private Collection<TicketChange> getTicketChangesCreatedBetween(Project project, DateRange dateRange) {
 		String query = "SELECT tc FROM TicketChange AS tc WHERE tc.ticket.project = :project AND tc.changeDate BETWEEN :startDate AND :endDate";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("project", project);
@@ -314,10 +349,7 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 		return this.getJpaTemplate().findByNamedParams(query, params);
 	}
 
-	/**
-	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getRepositoryChangesCreatedBetween(org.programmerplanet.intracollab.model.Project, org.programmerplanet.intracollab.util.DateRange)
-	 */
-	public Collection<RepositoryChange> getRepositoryChangesCreatedBetween(Project project, DateRange dateRange) {
+	private Collection<RepositoryChange> getRepositoryChangesCreatedBetween(Project project, DateRange dateRange) {
 		String query = "SELECT rc FROM RepositoryChange AS rc WHERE rc.project = :project AND rc.changeDate BETWEEN :startDate AND :endDate";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("project", project);
@@ -326,10 +358,7 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 		return this.getJpaTemplate().findByNamedParams(query, params);
 	}
 
-	/**
-	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getCommentsCreatedBetween(org.programmerplanet.intracollab.model.Project, org.programmerplanet.intracollab.util.DateRange)
-	 */
-	public Collection<Comment> getCommentsCreatedBetween(Project project, DateRange dateRange) {
+	private Collection<Comment> getCommentsCreatedBetween(Project project, DateRange dateRange) {
 		String query = "SELECT c FROM Comment AS c WHERE c.ticket.project = :project AND c.created BETWEEN :startDate AND :endDate";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("project", project);
@@ -338,10 +367,7 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 		return this.getJpaTemplate().findByNamedParams(query, params);
 	}
 
-	/**
-	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getAttachmentsCreatedBetween(org.programmerplanet.intracollab.model.Project, org.programmerplanet.intracollab.util.DateRange)
-	 */
-	public Collection<AttachmentInfo> getAttachmentsCreatedBetween(Project project, DateRange dateRange) {
+	private Collection<AttachmentInfo> getAttachmentsCreatedBetween(Project project, DateRange dateRange) {
 		String query = "SELECT a FROM AttachmentInfo AS a WHERE a.ticket.project = :project AND a.created BETWEEN :startDate AND :endDate";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("project", project);

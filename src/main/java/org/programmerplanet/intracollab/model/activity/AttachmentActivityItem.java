@@ -1,9 +1,8 @@
-package org.programmerplanet.intracollab.web.attachment;
+package org.programmerplanet.intracollab.model.activity;
 
 import java.util.Date;
 
 import org.programmerplanet.intracollab.model.AttachmentInfo;
-import org.programmerplanet.intracollab.web.project.ActivityItem;
 
 /**
  * An <code>ActivityItem</code> for an <code>Attachment</code>.
@@ -21,14 +20,14 @@ public class AttachmentActivityItem implements ActivityItem {
 	}
 
 	/**
-	 * @see org.programmerplanet.intracollab.web.project.ActivityItem#getDate()
+	 * @see org.programmerplanet.intracollab.model.activity.ActivityItem#getDate()
 	 */
 	public Date getDate() {
 		return attachment.getCreated();
 	}
 
 	/**
-	 * @see org.programmerplanet.intracollab.web.project.ActivityItem#getDescription()
+	 * @see org.programmerplanet.intracollab.model.activity.ActivityItem#getDescription()
 	 */
 	public String getDescription() {
 		return "Ticket #" + attachment.getTicket().getId() + " attachment created by " + attachment.getCreatedBy();
