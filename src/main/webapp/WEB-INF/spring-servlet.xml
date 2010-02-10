@@ -81,6 +81,8 @@
 
 	<bean id="milestoneViewController" class="org.programmerplanet.intracollab.web.milestone.MilestoneViewController"/>
 
+	<bean id="userActivityController" class="org.programmerplanet.intracollab.web.user.UserActivityController"/>
+
 	<bean id="searchController" class="org.programmerplanet.intracollab.web.SearchController">
 		<property name="sessionForm" value="false"/>
 		<property name="commandName" value="search"/>
@@ -120,6 +122,7 @@
 				<prop key="/attachment/download.do">attachmentDownloadController</prop>
 				<prop key="/repository_change/view.do">repositoryChangeViewController</prop>
 				<prop key="/milestone/view.do">milestoneViewController</prop>
+				<prop key="/user/activity.do">userActivityController</prop>
 				<prop key="/search.do">searchController</prop>
 			</props>
 		</property>

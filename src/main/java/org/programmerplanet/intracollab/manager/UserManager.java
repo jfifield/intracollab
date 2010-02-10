@@ -17,6 +17,8 @@ public interface UserManager {
 
 	User getUser(Long id);
 
+	User getUser(String username);
+
 	User getUser(String username, String password);
 
 	void saveUser(User user);

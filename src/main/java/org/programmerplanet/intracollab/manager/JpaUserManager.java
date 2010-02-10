@@ -33,6 +33,18 @@ public class JpaUserManager extends JpaDaoSupport implements UserManager {
 	}
 
 	/**
+	 * @see org.programmerplanet.intracollab.manager.UserManager#getUser(java.lang.String)
+	 */
+	public User getUser(String username) {
+		String query = "SELECT u FROM User AS u WHERE u.username = :username";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("username", username);
+		SingleResultJpaCallback callback = new SingleResultJpaCallback(query, params);
+		User user = (User)this.getJpaTemplate().execute(callback);
+		return user;
+	}
+
+	/**
 	 * @see org.programmerplanet.intracollab.manager.UserManager#getUser(java.lang.String, java.lang.String)
 	 */
 	public User getUser(String username, String password) {

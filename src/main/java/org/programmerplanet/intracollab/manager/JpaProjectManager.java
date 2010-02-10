@@ -377,6 +377,86 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 	}
 
 	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getUserActivity(org.programmerplanet.intracollab.model.User, org.programmerplanet.intracollab.util.DateRange)
+	 */
+	public List<ActivityItem> getUserActivity(User user, DateRange dateRange) {
+		List<ActivityItem> activity = new LinkedList<ActivityItem>();
+
+		Collection<Ticket> tickets = getTicketsCreatedBetween(user, dateRange);
+		for (Ticket ticket : tickets) {
+			activity.add(new TicketActivityItem(ticket));
+		}
+
+		Collection<TicketChange> ticketChanges = getTicketChangesCreatedBetween(user, dateRange);
+		for (TicketChange ticketChange : ticketChanges) {
+			activity.add(new TicketChangeActivityItem(ticketChange));
+		}
+
+		Collection<RepositoryChange> repositoryChanges = getRepositoryChangesCreatedBetween(user, dateRange);
+		for (RepositoryChange repositoryChange : repositoryChanges) {
+			activity.add(new RepositoryChangeActivityItem(repositoryChange));
+		}
+
+		Collection<Comment> comments = getCommentsCreatedBetween(user, dateRange);
+		for (Comment comment : comments) {
+			activity.add(new CommentActivityItem(comment));
+		}
+
+		Collection<AttachmentInfo> attachments = getAttachmentsCreatedBetween(user, dateRange);
+		for (AttachmentInfo attachment : attachments) {
+			activity.add(new AttachmentActivityItem(attachment));
+		}
+
+		Collections.sort(activity, new PropertyComparator("date", false, false));
+		return activity;
+	}
+
+	private Collection<Ticket> getTicketsCreatedBetween(User user, DateRange dateRange) {
+		String query = "SELECT t FROM Ticket AS t WHERE t.createdBy = :username AND t.created BETWEEN :startDate AND :endDate";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("username", user.getUsername());
+		params.put("startDate", dateRange.getStart());
+		params.put("endDate", dateRange.getEnd());
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	private Collection<TicketChange> getTicketChangesCreatedBetween(User user, DateRange dateRange) {
+		String query = "SELECT tc FROM TicketChange AS tc WHERE tc.username = :username AND tc.changeDate BETWEEN :startDate AND :endDate";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("username", user.getUsername());
+		params.put("startDate", dateRange.getStart());
+		params.put("endDate", dateRange.getEnd());
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	private Collection<RepositoryChange> getRepositoryChangesCreatedBetween(User user, DateRange dateRange) {
+		String query = "SELECT rc FROM RepositoryChange AS rc WHERE rc.username = :username AND rc.changeDate BETWEEN :startDate AND :endDate";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("username", user.getUsername());
+		params.put("startDate", dateRange.getStart());
+		params.put("endDate", dateRange.getEnd());
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	private Collection<Comment> getCommentsCreatedBetween(User user, DateRange dateRange) {
+		String query = "SELECT c FROM Comment AS c WHERE c.createdBy = :username AND c.created BETWEEN :startDate AND :endDate";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("username", user.getUsername());
+		params.put("startDate", dateRange.getStart());
+		params.put("endDate", dateRange.getEnd());
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	private Collection<AttachmentInfo> getAttachmentsCreatedBetween(User user, DateRange dateRange) {
+		String query = "SELECT a FROM AttachmentInfo AS a WHERE a.createdBy = :username AND a.created BETWEEN :startDate AND :endDate";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("username", user.getUsername());
+		params.put("startDate", dateRange.getStart());
+		params.put("endDate", dateRange.getEnd());
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	/**
 	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getRepositoryChange(java.lang.Long)
 	 */
 	public RepositoryChange getRepositoryChange(Long id) {

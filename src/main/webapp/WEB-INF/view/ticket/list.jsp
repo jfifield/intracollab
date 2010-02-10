@@ -27,7 +27,7 @@
 		<display:column title="#" class="shrink" property="id" sortable="true" href="ticket/view.do" paramId="id" paramProperty="id"/>
 		<display:column title="Name" property="name" sortable="true"/>
 		<display:column title="Component" property="component.name" sortable="true"/>
-		<display:column title="Assigned To" property="assignedTo.username" sortable="true"/>
+		<display:column title="Assigned To" property="assignedTo.username" sortable="true" href="user/activity.do" paramId="username" paramProperty="assignedTo.username"/>
 		<display:column title="Status" sortable="true" sortProperty="status">
 			${ticket.status.title}
 		</display:column>
@@ -35,7 +35,7 @@
 			${ticket.priority.title}
 		</display:column>
 		<display:column title="Created" property="created" format="{0,date,short}" sortable="true"/>
-		<display:column title="Created By" property="createdBy" sortable="true"/>
+		<display:column title="Created By" property="createdBy" sortable="true" href="user/activity.do" paramId="username" paramProperty="createdBy"/>
 		<c:set var="addLink"><a href="ticket/edit.do?project_id=${project.id}">Add</a></c:set>
 		<display:column title="${addLink}" headerClass="shrink">
 			<a href="ticket/edit.do?id=${ticket.id}">Edit</a>

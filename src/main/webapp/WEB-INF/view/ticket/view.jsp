@@ -21,7 +21,7 @@
 			<td class="label">Ticket #:</td>
 			<td>${ticket.id}</td>
 			<td class="label">Assigned To:</td>
-			<td>${ticket.assignedTo.username}</td>
+			<td><a href="user/activity.do?username=${ticket.assignedTo.username}">${ticket.assignedTo.username}</a></td>
 		</tr>
 		<tr>
 			<td class="label">Status:</td>
@@ -39,7 +39,7 @@
 			<td class="label">Created:</td>
 			<td><fmt:formatDate value="${ticket.created}" type="date" dateStyle="short"/></td>
 			<td class="label">Created By:</td>
-			<td>${ticket.createdBy}</td>
+			<td><a href="user/activity.do?username=${ticket.createdBy}">${ticket.createdBy}</a></td>
 		</tr>
 		<tr>
 			<td class="label">Description:</td>
@@ -54,7 +54,7 @@
 	<div style="border-bottom: 1px solid gray; text-align: right;"><a href="attachment/edit.do?ticket_id=${ticket.id}">Add Attachment</a></div>
 	<c:forEach var="attachment" items="${ticket.attachments}">
 		<div style="border-bottom: 1px solid gray;">
-			<i>${attachment.createdBy} on <fmt:formatDate value="${attachment.created}" type="both" dateStyle="short"/></i>
+			<i><a href="user/activity.do?username=${attachment.createdBy}">${attachment.createdBy}</a> on <fmt:formatDate value="${attachment.created}" type="both" dateStyle="short"/></i>
 			<p>
 				<a href="attachment/download.do?id=${attachment.id}">${attachment.fileName}</a> (${attachment.fileSize} bytes)
 			</p>
@@ -70,7 +70,7 @@
 	<div style="border-bottom: 1px solid gray; text-align: right;"><a href="comment/edit.do?ticket_id=${ticket.id}">Add Comment</a></div>
 	<c:forEach var="comment" items="${ticket.comments}">
 		<div style="border-bottom: 1px solid gray;">
-			<i>${comment.createdBy} on <fmt:formatDate value="${comment.created}" type="both" dateStyle="short"/></i>
+			<i><a href="user/activity.do?username=${comment.createdBy}">${comment.createdBy}</a> on <fmt:formatDate value="${comment.created}" type="both" dateStyle="short"/></i>
 			<p>
 				<ic:markup>${comment.content}</ic:markup>
 			</p>
@@ -82,7 +82,7 @@
 	<div class="section-header">Changes</div>
 	<c:forEach var="change" items="${ticket.ticketChanges}">
 		<div style="border-bottom: 1px solid gray;">
-			<i>${change.username} on <fmt:formatDate value="${change.changeDate}" type="both" dateStyle="short"/></i>
+			<i><a href="user/activity.do?username=${change.username}">${change.username}</a> on <fmt:formatDate value="${change.changeDate}" type="both" dateStyle="short"/></i>
 			<ul>
 				<c:forEach var="field" items="${change.fields}">
 					<li><b>${field.field}</b> from '${field.oldValue}' to '${field.newValue}'</li>
@@ -96,7 +96,7 @@
 	<div class="section-header">Repository Changes</div>
 	<c:forEach var="change" items="${ticket.repositoryChanges}">
 		<div style="border-bottom: 1px solid gray;">
-			<i>${change.username} on <fmt:formatDate value="${change.changeDate}" type="both" dateStyle="short"/></i>
+			<i><a href="user/activity.do?username=${change.username}">${change.username}</a> on <fmt:formatDate value="${change.changeDate}" type="both" dateStyle="short"/></i>
 			<p>
 				<ic:markup>[${change.id}] ${change.comment}</ic:markup>
 			</p>

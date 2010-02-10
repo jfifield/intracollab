@@ -8,7 +8,7 @@
 <tiles:putAttribute name="tab" value="projects"/>
 <tiles:putAttribute name="content" type="string">
 
-<i>${repositoryChange.username} on <fmt:formatDate value="${repositoryChange.changeDate}" type="both" dateStyle="short"/></i>
+<i><a href="user/activity.do?username=${repositoryChange.username}">${repositoryChange.username}</a> on <fmt:formatDate value="${repositoryChange.changeDate}" type="both" dateStyle="short"/></i>
 <p>
 	<ic:markup>[${repositoryChange.id}] ${repositoryChange.comment}</ic:markup>
 </p>

@@ -77,6 +77,8 @@ public interface ProjectManager {
 
 	List<ActivityItem> getProjectActivity(Project project, DateRange dateRange);
 
+	List<ActivityItem> getUserActivity(User user, DateRange dateRange);
+
 	RepositoryChange getRepositoryChange(Long id);
 
 	RepositoryChange getRepositoryChange(Long id, String... fetches);
