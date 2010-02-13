@@ -10,6 +10,10 @@
 		<li class="${active}">
 			<a href="project/list.do">Projects</a>
 		</li>
+		<c:set var="active"><c:if test="${tab == 'tickets'}">active</c:if></c:set>
+		<li class="${active}">
+			<a href="ticket/list.do">Tickets</a>
+		</li>
 	</ul>
 </div>
 

@@ -4,7 +4,7 @@
 <%@ taglib prefix="ic" uri="http://www.programmerplanet.org/intracollab" %>
 
 <tiles:insertDefinition name="default">
-<tiles:putAttribute name="tab" value="projects"/>
+<tiles:putAttribute name="tab" value="tickets"/>
 <tiles:putAttribute name="content" type="string">
 
 <div align="center">

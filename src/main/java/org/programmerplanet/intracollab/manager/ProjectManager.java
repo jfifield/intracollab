@@ -37,6 +37,12 @@ public interface ProjectManager {
 
 	boolean isProjectNameUnique(Long id, String name);
 
+	Collection<Ticket> getTickets();
+
+	Collection<Ticket> getClosedTickets();
+
+	Collection<Ticket> getOpenTickets();
+
 	Collection<Ticket> getTickets(Project project);
 
 	Collection<Ticket> getOpenTickets(Project project);
