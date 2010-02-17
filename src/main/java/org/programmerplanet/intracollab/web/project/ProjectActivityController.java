@@ -44,10 +44,10 @@ public class ProjectActivityController implements Controller {
 	 */
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Long id = ServletRequestUtils.getLongParameter(request, "id");
-		Project project = projectManager.getProject(id);
+		Project project = id != null ? projectManager.getProject(id) : null;
 		DateRange dateRange = getDateRange();
 
-		List<ActivityItem> activityItems = projectManager.getProjectActivity(project, dateRange);
+		List<ActivityItem> activityItems = (project != null) ? projectManager.getProjectActivity(project, dateRange) : projectManager.getActivity(dateRange);
 		Map<Date, List<ActivityItem>> activityItemsByDay = groupActivityItemsByDay(activityItems);
 
 		List<Date> days = new LinkedList<Date>(activityItemsByDay.keySet());
@@ -59,8 +59,12 @@ public class ProjectActivityController implements Controller {
 			Collections.sort(list, new PropertyComparator("date", false, false));
 		}
 
+		List<Project> projects = new LinkedList<Project>(projectManager.getProjects());
+		Collections.sort(projects, new PropertyComparator("name", false, true));
+
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("project", project);
+		model.put("projects", projects);
 		model.put("days", days);
 		model.put("activityItemsByDay", activityItemsByDay);
 

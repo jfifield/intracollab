@@ -4,10 +4,26 @@
 <%@ taglib prefix="ic" uri="http://www.programmerplanet.org/intracollab" %>
 
 <tiles:insertDefinition name="default">
-<tiles:putAttribute name="tab" value="projects"/>
+<tiles:putAttribute name="tab" value="activity"/>
 <tiles:putAttribute name="content" type="string">
 
-<h4>${project.name}: Activity</h4>
+<div align="right">
+	<form name="show_form">
+		Project:
+		<select name="id" onchange="document.forms['show_form'].submit();">
+			<c:set var="selected" value=""/>
+			<c:if test="${project == null}"><c:set var="selected">selected="selected"</c:set></c:if>
+			<option value=""${selected}>All</option>
+			<c:forEach var="projectOption" items="${projects}">
+				<c:set var="selected" value=""/>
+				<c:if test="${project.id == projectOption.id}"><c:set var="selected">selected="selected"</c:set></c:if>
+				<option value="${projectOption.id}"${selected}>${projectOption.name}</option>
+			</c:forEach>
+		</select>
+	</form>
+</div>
+
+<h4><c:if test="${project != null}">${project.name}: </c:if>Activity</h4>
 
 <c:forEach var="day" items="${days}">
 	<div class="section-header">

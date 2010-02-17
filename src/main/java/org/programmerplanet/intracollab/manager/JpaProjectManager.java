@@ -326,6 +326,81 @@ public class JpaProjectManager extends JpaDaoSupport implements ProjectManager {
 	}
 
 	/**
+	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getActivity(org.programmerplanet.intracollab.util.DateRange)
+	 */
+	public List<ActivityItem> getActivity(DateRange dateRange) {
+		List<ActivityItem> activity = new LinkedList<ActivityItem>();
+
+		Collection<Ticket> tickets = getTicketsCreatedBetween(dateRange);
+		for (Ticket ticket : tickets) {
+			activity.add(new TicketActivityItem(ticket));
+		}
+
+		Collection<TicketChange> ticketChanges = getTicketChangesCreatedBetween(dateRange);
+		for (TicketChange ticketChange : ticketChanges) {
+			activity.add(new TicketChangeActivityItem(ticketChange));
+		}
+
+		Collection<RepositoryChange> repositoryChanges = getRepositoryChangesCreatedBetween(dateRange);
+		for (RepositoryChange repositoryChange : repositoryChanges) {
+			activity.add(new RepositoryChangeActivityItem(repositoryChange));
+		}
+
+		Collection<Comment> comments = getCommentsCreatedBetween(dateRange);
+		for (Comment comment : comments) {
+			activity.add(new CommentActivityItem(comment));
+		}
+
+		Collection<AttachmentInfo> attachments = getAttachmentsCreatedBetween(dateRange);
+		for (AttachmentInfo attachment : attachments) {
+			activity.add(new AttachmentActivityItem(attachment));
+		}
+
+		Collections.sort(activity, new PropertyComparator("date", false, false));
+		return activity;
+	}
+
+	private Collection<Ticket> getTicketsCreatedBetween(DateRange dateRange) {
+		String query = "SELECT t FROM Ticket AS t WHERE t.created BETWEEN :startDate AND :endDate";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("startDate", dateRange.getStart());
+		params.put("endDate", dateRange.getEnd());
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	private Collection<TicketChange> getTicketChangesCreatedBetween(DateRange dateRange) {
+		String query = "SELECT tc FROM TicketChange AS tc WHERE tc.changeDate BETWEEN :startDate AND :endDate";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("startDate", dateRange.getStart());
+		params.put("endDate", dateRange.getEnd());
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	private Collection<RepositoryChange> getRepositoryChangesCreatedBetween(DateRange dateRange) {
+		String query = "SELECT rc FROM RepositoryChange AS rc WHERE rc.changeDate BETWEEN :startDate AND :endDate";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("startDate", dateRange.getStart());
+		params.put("endDate", dateRange.getEnd());
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	private Collection<Comment> getCommentsCreatedBetween(DateRange dateRange) {
+		String query = "SELECT c FROM Comment AS c WHERE c.created BETWEEN :startDate AND :endDate";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("startDate", dateRange.getStart());
+		params.put("endDate", dateRange.getEnd());
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	private Collection<AttachmentInfo> getAttachmentsCreatedBetween(DateRange dateRange) {
+		String query = "SELECT a FROM AttachmentInfo AS a WHERE a.created BETWEEN :startDate AND :endDate";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("startDate", dateRange.getStart());
+		params.put("endDate", dateRange.getEnd());
+		return this.getJpaTemplate().findByNamedParams(query, params);
+	}
+
+	/**
 	 * @see org.programmerplanet.intracollab.manager.ProjectManager#getProjectActivity(org.programmerplanet.intracollab.model.Project, org.programmerplanet.intracollab.util.DateRange)
 	 */
 	public List<ActivityItem> getProjectActivity(Project project, DateRange dateRange) {

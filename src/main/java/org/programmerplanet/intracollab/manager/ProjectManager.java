@@ -81,6 +81,8 @@ public interface ProjectManager {
 
 	void saveRepositoryChanges(SourceRepository sourceRepository, Collection<RepositoryChange> repositoryChanges);
 
+	List<ActivityItem> getActivity(DateRange dateRange);
+
 	List<ActivityItem> getProjectActivity(Project project, DateRange dateRange);
 
 	List<ActivityItem> getUserActivity(User user, DateRange dateRange);
