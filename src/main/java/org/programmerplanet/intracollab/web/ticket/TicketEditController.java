@@ -48,6 +48,19 @@ public class TicketEditController extends SimpleMultiActionFormController {
 	}
 
 	/**
+	 * @see org.springframework.web.servlet.mvc.AbstractController#handleRequest(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
+	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Long projectId = ServletRequestUtils.getLongParameter(request, "project_id");
+		if (projectId == null) {
+			Collection<Project> projects = projectManager.getProjects();
+			return new ModelAndView("ticket/select_project", "projects", projects);
+		} else {
+			return super.handleRequest(request, response);
+		}
+	}
+
+	/**
 	 * @see org.springframework.web.servlet.mvc.BaseCommandController#initBinder(javax.servlet.http.HttpServletRequest, org.springframework.web.bind.ServletRequestDataBinder)
 	 */
 	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {

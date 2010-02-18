@@ -50,7 +50,12 @@
 		</display:column>
 		<display:column title="Created" property="created" format="{0,date,short}" sortable="true"/>
 		<display:column title="Created By" property="createdBy" sortable="true" href="user/activity.do" paramId="username" paramProperty="createdBy"/>
-		<c:set var="addLink"><c:if test="${project != null}"><a href="ticket/edit.do?project_id=${project.id}">Add</a></c:if></c:set>
+		<c:url var="addLinkHref" value="ticket/edit.do">
+			<c:if test="${project != null}">
+				<c:param name="project_id" value="${project.id}"/>
+			</c:if>
+		</c:url>
+		<c:set var="addLink"><a href="${addLinkHref}">Add</a></c:set>
 		<display:column title="${addLink}" headerClass="shrink">
 			<a href="ticket/edit.do?id=${ticket.id}">Edit</a>
 		</display:column>
