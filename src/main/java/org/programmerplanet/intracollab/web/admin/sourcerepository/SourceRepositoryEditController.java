@@ -12,6 +12,7 @@ import org.programmerplanet.intracollab.manager.ProjectManager;
 import org.programmerplanet.intracollab.model.CvsSourceRepository;
 import org.programmerplanet.intracollab.model.Project;
 import org.programmerplanet.intracollab.model.SourceRepository;
+import org.programmerplanet.intracollab.model.SubversionSourceRepository;
 import org.programmerplanet.intracollab.util.Pair;
 import org.programmerplanet.intracollab.web.ServletRequestUtils;
 import org.programmerplanet.intracollab.web.spring.SimpleMultiActionFormController;
@@ -31,11 +32,13 @@ public class SourceRepositoryEditController extends SimpleMultiActionFormControl
 
 	private static final String TYPE_NONE = "none";
 	private static final String TYPE_CVS = "cvs";
+	private static final String TYPE_SUBVERSION = "svn";
 
 	private static final List<Pair<String, String>> TYPE_OPTIONS = new ArrayList<Pair<String, String>>() {
 		{
 			add(new Pair<String, String>(TYPE_NONE, "None"));
 			add(new Pair<String, String>(TYPE_CVS, "CVS"));
+			add(new Pair<String, String>(TYPE_SUBVERSION, "Subversion"));
 		}
 	};
 
@@ -57,6 +60,8 @@ public class SourceRepositoryEditController extends SimpleMultiActionFormControl
 			sourceRepository = project.getSourceRepository();
 			if (TYPE_CVS.equals(form.getType()) && !(sourceRepository instanceof CvsSourceRepository)) {
 				sourceRepository = new CvsSourceRepository();
+			} else if (TYPE_SUBVERSION.equals(form.getType()) && !(sourceRepository instanceof SubversionSourceRepository)) {
+				sourceRepository = new SubversionSourceRepository();
 			}
 			BeanUtils.copyProperties(form, sourceRepository);
 		}
@@ -94,6 +99,8 @@ public class SourceRepositoryEditController extends SimpleMultiActionFormControl
 			BeanUtils.copyProperties(sourceRepository, form);
 			if (sourceRepository instanceof CvsSourceRepository) {
 				form.setType(TYPE_CVS);
+			} else if (sourceRepository instanceof SubversionSourceRepository) {
+				form.setType(TYPE_SUBVERSION);
 			}
 		}
 

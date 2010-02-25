@@ -18,8 +18,8 @@
   		<basic name="modules">
   			<column name="modules"/>
   		</basic>
-  		<basic name="lastChangeDate">
-  			<column name="last_change_date"/>
+  		<basic name="lastChangePoint">
+  			<column name="last_change_point"/>
   		</basic>
   		<one-to-one name="project" mapped-by="sourceRepository" target-entity="Project"/>
   		<transient name="repositoryChanges"/>
@@ -33,5 +33,13 @@
   		<transient name="logInformationCollection"/>
   	</attributes>
   </entity>
-  
+
+  <entity class="SubversionSourceRepository">
+  	<discriminator-value>svn</discriminator-value>
+  	<attributes>
+  		<transient name="repositoryChanges"/>
+  		<transient name="svnLogEntries"/>
+  	</attributes>
+  </entity>
+
 </entity-mappings>

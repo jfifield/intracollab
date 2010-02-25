@@ -36,7 +36,7 @@ public class RepositoryChangeScanTaskTest extends TestCase {
 	}
 
 	public void testRun_NoChanges() {
-		SourceRepository sourceRepository = new TestSourceRepository(Collections.EMPTY_LIST);
+		SourceRepository sourceRepository = new TestSourceRepository(Collections.EMPTY_LIST, null);
 
 		ProjectManager projectManager = EasyMock.createMock(ProjectManager.class);
 		EasyMock.expect(projectManager.getSourceRepositories()).andReturn(Collections.singleton(sourceRepository));
@@ -55,7 +55,7 @@ public class RepositoryChangeScanTaskTest extends TestCase {
 		repositoryChanges.add(change1);
 		repositoryChanges.add(change2);
 
-		SourceRepository sourceRepository = new TestSourceRepository(repositoryChanges);
+		SourceRepository sourceRepository = new TestSourceRepository(repositoryChanges, Long.valueOf(100));
 
 		Ticket ticket1 = new Ticket();
 		Ticket ticket2 = new Ticket();
@@ -79,7 +79,7 @@ public class RepositoryChangeScanTaskTest extends TestCase {
 		assertTrue("ticket2 not linked to change2", change2.getTickets().contains(ticket2));
 
 		// verify the last change date
-		assertEquals("sourceRepository.lastChangeDate", date("11/28/2009 10:46:40"), sourceRepository.getLastChangeDate());
+		assertEquals("sourceRepository.lastChangePoint", Long.valueOf(100), sourceRepository.getLastChangePoint());
 	}
 
 	public void testRun_Changes_UnknownTickets() throws Exception {
@@ -89,7 +89,7 @@ public class RepositoryChangeScanTaskTest extends TestCase {
 		repositoryChanges.add(change1);
 		repositoryChanges.add(change2);
 
-		SourceRepository sourceRepository = new TestSourceRepository(repositoryChanges);
+		SourceRepository sourceRepository = new TestSourceRepository(repositoryChanges, Long.valueOf(101));
 
 		ProjectManager projectManager = EasyMock.createMock(ProjectManager.class);
 		EasyMock.expect(projectManager.getSourceRepositories()).andReturn(Collections.singleton(sourceRepository));
@@ -108,7 +108,7 @@ public class RepositoryChangeScanTaskTest extends TestCase {
 		assertEquals("# tickets in change2", 0, change2.getTickets().size());
 
 		// verify the last change date
-		assertEquals("sourceRepository.lastChangeDate", date("11/28/2009 10:46:40"), sourceRepository.getLastChangeDate());
+		assertEquals("sourceRepository.lastChangePoint", Long.valueOf(101), sourceRepository.getLastChangePoint());
 	}
 
 	public void testRun_SourceRepositoryAccessException() throws Exception {
@@ -120,7 +120,7 @@ public class RepositoryChangeScanTaskTest extends TestCase {
 
 		List<SourceRepository> sourceRepositories = new LinkedList<SourceRepository>();
 		SourceRepository sourceRepository1 = new TestSourceRepository(new SourceRepositoryAccessException(null));
-		SourceRepository sourceRepository2 = new TestSourceRepository(repositoryChanges);
+		SourceRepository sourceRepository2 = new TestSourceRepository(repositoryChanges, Long.valueOf(102));
 		sourceRepositories.add(sourceRepository1);
 		sourceRepositories.add(sourceRepository2);
 
@@ -146,7 +146,7 @@ public class RepositoryChangeScanTaskTest extends TestCase {
 		assertTrue("ticket2 not linked to change2", change2.getTickets().contains(ticket2));
 
 		// verify the last change date
-		assertEquals("sourceRepository.lastChangeDate", date("11/28/2009 10:46:40"), sourceRepository2.getLastChangeDate());
+		assertEquals("sourceRepository.lastChangePoint", Long.valueOf(102), sourceRepository2.getLastChangePoint());
 	}
 
 	private RepositoryChange createRepositoryChange(String username, String changeDate, String comment) throws ParseException {
@@ -165,13 +165,15 @@ public class RepositoryChangeScanTaskTest extends TestCase {
 
 		private RuntimeException exception;
 		private List<RepositoryChange> repositoryChanges;
+		private Long lastChangePoint;
 
 		public TestSourceRepository(RuntimeException exception) {
 			this.exception = exception;
 		}
 
-		public TestSourceRepository(List<RepositoryChange> repositoryChanges) {
+		public TestSourceRepository(List<RepositoryChange> repositoryChanges, Long lastChangePoint) {
 			this.repositoryChanges = repositoryChanges;
+			this.lastChangePoint = lastChangePoint;
 		}
 
 		public List<RepositoryChange> getRepositoryChanges() {
@@ -180,6 +182,13 @@ public class RepositoryChangeScanTaskTest extends TestCase {
 			} else {
 				return repositoryChanges;
 			}
+		}
+
+		/**
+		 * @see org.programmerplanet.intracollab.model.SourceRepository#getLastChangePoint(java.util.List)
+		 */
+		public Long getLastChangePoint(List<RepositoryChange> repositoryChanges) {
+			return lastChangePoint;
 		}
 
 	}

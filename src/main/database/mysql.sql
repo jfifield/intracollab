@@ -30,7 +30,7 @@ CREATE TABLE `ic_source_repository` (
   `repository_type` varchar(16) NOT NULL,
   `path` varchar(128) NOT NULL,
   `modules` text NOT NULL,
-  `last_change_date` datetime,
+  `last_change_point` bigint unsigned,
   CONSTRAINT `pk_source_repository` PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 

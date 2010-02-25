@@ -36,6 +36,9 @@ import org.springframework.beans.support.PropertyComparator;
  */
 public class CvsSourceRepository extends SourceRepository {
 
+	/**
+	 * @see org.programmerplanet.intracollab.model.SourceRepository#getRepositoryChanges()
+	 */
 	public List<RepositoryChange> getRepositoryChanges() {
 		Collection<LogInformation> logInformationCollection;
 		try {
@@ -49,6 +52,22 @@ public class CvsSourceRepository extends SourceRepository {
 		}
 		List<RepositoryChange> changes = createRepositoryChanges(logInformationCollection);
 		return changes;
+	}
+
+	/**
+	 * The last change point for a CVS repository is the latest change date/time in millis (java.util.Date.getTime()).
+	 * 
+	 * @see org.programmerplanet.intracollab.model.SourceRepository#getLastChangePoint(java.util.List)
+	 */
+	public Long getLastChangePoint(List<RepositoryChange> repositoryChanges) {
+		Date lastChangeDate = null;
+		for (RepositoryChange change : repositoryChanges) {
+			Date changeDate = change.getChangeDate();
+			if (lastChangeDate == null || changeDate.after(lastChangeDate)) {
+				lastChangeDate = changeDate;
+			}
+		}
+		return Long.valueOf(lastChangeDate.getTime());
 	}
 
 	private List<RepositoryChange> createRepositoryChanges(Collection<LogInformation> logInformationCollection) {
@@ -141,9 +160,10 @@ public class CvsSourceRepository extends SourceRepository {
 			}
 			rlog.setModules(moduleNames);
 
-			if (getLastChangeDate() != null) {
+			if (getLastChangePoint() != null) {
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-				String dateFilter = dateFormat.format(getLastChangeDate());
+				Date lastChangeDate = new Date(getLastChangePoint());
+				String dateFilter = dateFormat.format(lastChangeDate);
 				rlog.setDateFilter(">" + dateFilter);
 			}
 

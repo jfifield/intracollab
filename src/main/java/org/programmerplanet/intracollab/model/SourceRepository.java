@@ -1,6 +1,5 @@
 package org.programmerplanet.intracollab.model;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ public abstract class SourceRepository extends BaseEntity {
 	private Project project;
 	private String path;
 	private String modules;
-	private Date lastChangeDate;
+	private Long lastChangePoint;
 
 	public void setProject(Project project) {
 		this.project = project;
@@ -41,14 +40,16 @@ public abstract class SourceRepository extends BaseEntity {
 		return modules;
 	}
 
-	public void setLastChangeDate(Date lastChangeDate) {
-		this.lastChangeDate = lastChangeDate;
+	public void setLastChangePoint(Long lastChangePoint) {
+		this.lastChangePoint = lastChangePoint;
 	}
 
-	public Date getLastChangeDate() {
-		return lastChangeDate;
+	public Long getLastChangePoint() {
+		return lastChangePoint;
 	}
 
 	public abstract List<RepositoryChange> getRepositoryChanges();
+
+	public abstract Long getLastChangePoint(List<RepositoryChange> repositoryChanges);
 
 }

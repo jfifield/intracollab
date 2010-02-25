@@ -1,7 +1,6 @@
 package org.programmerplanet.intracollab.manager;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -51,21 +50,10 @@ public class RepositoryChangeScanTask extends TimerTask {
 		log.debug("Found " + changes.size() + " change(s).");
 		if (!changes.isEmpty()) {
 			findAndAttachTicketReferences(changes);
-			Date lastChangeDate = getLastChangeDate(changes);
-			sourceRepository.setLastChangeDate(lastChangeDate);
+			Long lastChangePoint = sourceRepository.getLastChangePoint(changes);
+			sourceRepository.setLastChangePoint(lastChangePoint);
 			projectManager.saveRepositoryChanges(sourceRepository, changes);
 		}
-	}
-
-	private Date getLastChangeDate(Collection<RepositoryChange> changes) {
-		Date lastChangeDate = null;
-		for (RepositoryChange change : changes) {
-			Date changeDate = change.getChangeDate();
-			if (lastChangeDate == null || changeDate.after(lastChangeDate)) {
-				lastChangeDate = changeDate;
-			}
-		}
-		return lastChangeDate;
 	}
 
 	private void findAndAttachTicketReferences(Collection<RepositoryChange> changes) {
